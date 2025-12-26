@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
+/* @custom-variant dark (&:is(.dark *)); */
+/* globals.css */
+@custom-variant dark (&:where(.dark, .dark *));
 :root {
   --background: 15 23 42;
   --foreground: 241 245 250;
@@ -112,6 +113,10 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-mono: var(--font-mono), monospace;
 }
 
 @layer base {
@@ -142,4 +147,28 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(6 182 212 / 0.5);
+}
+
+#cursor-glow {
+  background: radial-gradient(
+    600px circle at var(--x, 50%) var(--y, 50%),
+    rgba(34, 211, 238, 0.15),
+    transparent 60%
+  );
+  opacity: var(--glow-opacity, 0.25);
+}
+
+* {
+  cursor: default;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+.cursor-hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  border-color: #22d3ee;
+  background-color: rgba(34, 211, 238, 0.1);
 }

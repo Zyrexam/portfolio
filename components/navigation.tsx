@@ -1,12 +1,12 @@
-"use client"
-import Link from "next/link"
+"use client";
+import Link from "next/link";
 
 const navItems = [
   { label: "01. About", href: "#about" },
   { label: "02. Experience", href: "#experience" },
-  { label: "03. Work", href: "#work" },
+  { label: "03. Projects", href: "#projects" },
   { label: "04. Contact", href: "#contact" },
-]
+];
 
 export default function Navigation() {
   return (
@@ -16,9 +16,9 @@ export default function Navigation() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex h-10 w-10 items-center justify-center rounded border border-cyan-500 text-cyan-400 font-bold text-lg hover:bg-cyan-500/10 transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded border border-cyan-500 text-cyan-400 font-bold text-lg hover:bg-cyan-500/10 transition-colors font-serif"
           >
-            B
+            M
           </Link>
 
           {/* Desktop Nav */}
@@ -41,5 +41,5 @@ export default function Navigation() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

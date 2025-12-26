@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Navigation from "@/components/navigation"
-import Hero from "@/components/sections/hero"
-import About from "@/components/sections/about"
-import Experience from "@/components/sections/experience"
-import Work from "@/components/sections/work"
-import Contact from "@/components/sections/contact"
-import Footer from "@/components/footer"
-import SidebarProfile from "@/components/sidebar-profile"
+import { useState } from "react";
+import Navigation from "@/components/navigation";
+import Hero from "@/components/sections/hero";
+import About from "@/components/sections/about";
+import Experience from "@/components/sections/experience";
+import Projects from "@/components/sections/projects";
+import Contact from "@/components/sections/contact";
+import Footer from "@/components/footer";
+import SidebarProfile from "@/components/sidebar-profile";
 
 export default function Home() {
-  const [showAllProjects, setShowAllProjects] = useState(false)
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -32,7 +32,10 @@ export default function Home() {
               <Hero />
               <About />
               <Experience />
-              <Work showAllProjects={showAllProjects} onToggle={setShowAllProjects} />
+              <Projects
+                showAllProjects={showAllProjects}
+                onToggle={setShowAllProjects}
+              />
               <Contact />
             </div>
 
@@ -46,5 +49,5 @@ export default function Home() {
 
       <Footer />
     </div>
-  )
+  );
 }
