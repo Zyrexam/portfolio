@@ -95,7 +95,12 @@ const projects = [
 
 const allProjects = projects;
 
-export default function Projects() {
+interface ProjectsProps {
+  showAllProjects?: boolean;
+  onToggle?: (show: boolean | ((prev: boolean) => boolean)) => void;
+}
+
+export default function Projects({ showAllProjects, onToggle }: ProjectsProps) {
   return (
     <section id="projects" className="space-y-12 py-20">
       <div className="flex items-center gap-4">
