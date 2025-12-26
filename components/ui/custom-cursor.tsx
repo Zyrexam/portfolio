@@ -27,15 +27,20 @@ export default function CustomCursor() {
       // The dot stays pinned to the mouse
       cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
 
-      // Handle Hover states
       const target = e.target as HTMLElement;
       const isClickable = target.closest('a, button, [role="button"]');
+      const isTextInput = target.closest("input, textarea");
 
       if (isClickable) {
         follower.classList.add("cursor-active");
+        follower.classList.remove("cursor-text");
+        cursor.classList.add("cursor-hidden");
+      } else if (isTextInput) {
+        follower.classList.add("cursor-text");
+        follower.classList.remove("cursor-active");
         cursor.classList.add("cursor-hidden");
       } else {
-        follower.classList.remove("cursor-active");
+        follower.classList.remove("cursor-active", "cursor-text");
         cursor.classList.remove("cursor-hidden");
       }
     };
@@ -72,6 +77,15 @@ export default function CustomCursor() {
           margin-top: -30px !important;
           background-color: rgba(34, 211, 238, 0.1);
           border-color: rgba(34, 211, 238, 0.8);
+        }
+        .cursor-text {
+          width: 4px !important;
+          height: 24px !important;
+          margin-left: -2px !important;
+          margin-top: -12px !important;
+          border-radius: 2px !important;
+          background-color: rgba(34, 211, 238, 0.9);
+          border: none !important;
         }
         .cursor-hidden {
           opacity: 0;

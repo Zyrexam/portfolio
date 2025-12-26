@@ -6,30 +6,22 @@ const experiences = [
   {
     company: "IIT Jodhpur",
     position: "Undergraduate Researcher",
-    period: "Aug 2023 - Present",
+    period: "Jun 2025 - Jul 2025",
     description: [
-      "Conducting research on distributed systems and high-performance computing under faculty guidance.",
-      "Optimizing backend architectures for low-latency data processing in large-scale environments.",
-      "Collaborating with doctoral students to implement novel algorithms in Python and C++.",
+      "Co-authored research on advanced federated learning strategies (FedPer, FedRep, ClusterFL) and proposed a novel method, FedMeet, achieving 85% accuracy on meeting client sensor data.",
+      "Built a meeting engagement recognition system using an IMU-driven XGBoost model converted to ONNX, achieving 91.19% ± 1.22 cross-validation accuracy.",
+      "Integrated the ML model into a backend system with a greedy update algorithm to optimize client–server communication and generate productivity feedback using LLMs.",
     ],
   },
   {
-    company: "Software Internship",
-    position: "Full Stack Developer Intern",
-    period: "May 2024 - July 2024",
+    company: "IIT Jodhpur",
+    position: "Bachelor Project (Research & Engineering)",
+    period: "Sep 2025 - Jan 2026",
     description: [
-      "Built and deployed a responsive dashboard using Next.js and PostgreSQL for real-time data visualization.",
-      "Refactored legacy REST APIs into GraphQL, reducing payload size by 40% and improving frontend performance.",
-      "Collaborated with the design team to implement accessible UI components following WCAG 2.1 guidelines.",
-    ],
-  },
-  {
-    company: "Open Source",
-    position: "Contributor",
-    period: "Jan 2023 - Present",
-    description: [
-      "Actively contributing to various web-based open-source projects, focusing on performance optimizations.",
-      "Fixed critical bugs in community-driven libraries, enhancing stability for thousands of users.",
+      "Designed a three-phase automated pipeline to transform natural-language user intent into secure, deployable Solidity smart contracts.",
+      "Implemented intent extraction into validated JSON specifications, rule-enforced Solidity generation using OpenZeppelin standards, and automatic repair of compilation issues.",
+      "Integrated static and symbolic analysis tools (Slither, Mythril, Semgrep) with LLM-based patching to detect and fix smart contract vulnerabilities.",
+      "Performed comparative evaluation against single-phase LLM pipelines, demonstrating improvements in security, reproducibility, and maintainability.",
     ],
   },
 ];
@@ -52,7 +44,7 @@ export default function Experience() {
         <div className="flex flex-row md:flex-col overflow-x-auto md:overflow-visible border-b md:border-b-0 md:border-l border-slate-700/50 min-w-[160px]">
           {experiences.map((exp, idx) => (
             <button
-              key={exp.company}
+              key={`${exp.company}-${idx}`}
               onClick={() => setActiveIndex(idx)}
               className={`px-5 py-3 text-left border-b-2 md:border-b-0 md:border-l-2 transition-all whitespace-nowrap font-mono text-sm ${
                 activeIndex === idx
@@ -67,32 +59,38 @@ export default function Experience() {
 
         {/* Experience details */}
         <div className="flex-1 min-h-[320px] animate-in fade-in slide-in-from-right-4 duration-500">
-          <div className="space-y-6">
-            <div className="space-y-1">
-              <h3 className="text-2xl font-serif font-bold text-white leading-tight">
-                {experiences[activeIndex].position}{" "}
-                <span className="text-cyan-400">
-                  @ {experiences[activeIndex].company}
-                </span>
-              </h3>
-              <p className="text-slate-500 font-mono text-sm tracking-wide">
-                {experiences[activeIndex].period}
-              </p>
+          {!experiences[activeIndex] ? (
+            <div className="flex items-center justify-center h-full text-slate-500 font-mono">
+              Select an experience to view details
             </div>
-            <ul className="space-y-4">
-              {experiences[activeIndex].description.map((desc, idx) => (
-                <li
-                  key={idx}
-                  className="flex gap-4 text-slate-300/90 text-lg leading-relaxed group"
-                >
-                  <span className="text-cyan-400 flex-shrink-0 mt-2 transition-transform group-hover:translate-x-1">
-                    ▹
+          ) : (
+            <div className="space-y-6">
+              <div className="space-y-1">
+                <h3 className="text-2xl font-serif font-bold text-white leading-tight">
+                  {experiences[activeIndex].position}{" "}
+                  <span className="text-cyan-400">
+                    @ {experiences[activeIndex].company}
                   </span>
-                  <span className="font-sans">{desc}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+                </h3>
+                <p className="text-slate-500 font-mono text-sm tracking-wide">
+                  {experiences[activeIndex].period}
+                </p>
+              </div>
+              <ul className="space-y-4">
+                {experiences[activeIndex].description.map((desc, idx) => (
+                  <li
+                    key={idx}
+                    className="flex gap-4 text-slate-300/90 text-lg leading-relaxed group"
+                  >
+                    <span className="text-cyan-400 flex-shrink-0 mt-2 transition-transform group-hover:translate-x-1">
+                      ▹
+                    </span>
+                    <span className="font-sans">{desc}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </section>
