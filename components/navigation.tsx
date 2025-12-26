@@ -2,10 +2,11 @@
 import Link from "next/link";
 
 const navItems = [
-  { label: "01. About", href: "#about" },
-  { label: "02. Experience", href: "#experience" },
-  { label: "03. Projects", href: "#projects" },
-  { label: "04. Contact", href: "#contact" },
+  { name: "About", href: "#about", number: "01" },
+  { name: "Skills", href: "#skills", number: "02" },
+  { name: "Experience", href: "#experience", number: "03" },
+  { name: "Projects", href: "#projects", number: "04" },
+  { name: "Contact", href: "#contact", number: "05" },
 ];
 
 export default function Navigation() {
@@ -29,15 +30,21 @@ export default function Navigation() {
                 href={item.href}
                 className="text-sm font-mono text-slate-300 hover:text-cyan-400 transition-colors"
               >
-                {item.label}
+                <span className="text-cyan-400 mr-1">{item.number}.</span>{" "}
+                {item.name}
               </a>
             ))}
           </div>
 
           {/* Resume Button */}
-          <button className="px-4 py-2 border border-cyan-500 text-cyan-400 text-sm font-mono hover:bg-cyan-500/10 transition-colors rounded">
-            Resume
-          </button>
+          <a
+            href="https://drive.google.com/uc?export=download&id=1IIoEg_9fFe5Q2cTfudjwlX2-e6fv5t4l"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 border border-cyan-500 text-cyan-400 text-sm font-mono hover:bg-cyan-500/10 transition-colors rounded"
+          >
+            Download CV
+          </a>
         </div>
       </div>
     </nav>

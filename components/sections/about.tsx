@@ -1,17 +1,8 @@
 "use client";
 
-const technologies = [
-  { name: "Java / Spring Boot", icon: "devicon-java-plain" },
-  { name: "Backend APIs & Systems", icon: "devicon-nodejs-plain" },
-  { name: "PostgreSQL / Databases", icon: "devicon-postgresql-plain" },
-  { name: "Distributed Systems", icon: "devicon-docker-plain" },
-  { name: "Python (ML for Systems)", icon: "devicon-python-plain" },
-  { name: "Docker / Cloud", icon: "devicon-docker-plain" },
-];
-
 export default function About() {
   return (
-    <section id="about" className="space-y-12 py-20">
+    <section id="about" className="space-y-12 py-24">
       <div className="flex items-center gap-4">
         <h2 className="text-3xl font-serif font-bold text-white">
           <span className="text-cyan-400 font-mono text-lg mr-2">01.</span>
@@ -20,74 +11,132 @@ export default function About() {
         <div className="h-[1px] flex-1 bg-slate-700/50 max-w-md hidden sm:block" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12">
+        {/* Left Column - Minimal MK Marker */}
         <div className="space-y-6">
-          <p className="text-slate-300/90 leading-relaxed text-lg font-sans">
-            Hello! My name is Mohit, and I focus on building scalable and
-            reliable backend systems that solve real-world problems. I’m
-            currently pursuing a B.Tech in Computer Science at{" "}
-            <span className="text-cyan-400">IIT Jodhpur</span>, where my
-            interest in systems engineering grew from understanding how software
-            behaves under real-world scale and constraints.
-          </p>
-          <p className="text-slate-300/90 leading-relaxed text-lg font-sans">
-            As an undergraduate researcher, I’ve worked at the intersection of{" "}
-            <span className="text-white font-medium">distributed systems</span>{" "}
-            and{" "}
-            <span className="text-white font-medium">
-              applied machine learning
-            </span>
-            , focusing on communication-efficient architectures, system
-            optimization, and privacy-preserving computation. This experience
-            strengthened my understanding of scalability, fault tolerance, and
-            performance trade-offs in real systems.
-          </p>
-          <p className="text-slate-300/90 leading-relaxed text-lg font-sans">
-            Moving forward, I aim to specialize in{" "}
-            <span className="text-white font-medium">
-              backend and distributed systems
-            </span>
-            , building services that are performant, secure, and resilient by
-            design. I’m particularly interested in system architecture,
-            data-intensive applications, and engineering solutions that scale
-            reliably under real-world workloads.
-          </p>
+          <div className="p-8 rounded-lg bg-slate-800/10 border border-slate-700/50 flex flex-col items-center justify-center text-center space-y-4">
+            <div className="w-24 h-24 rounded-full bg-cyan-500/5 border-2 border-cyan-500/20 flex items-center justify-center">
+              <span className="text-3xl font-serif font-bold text-cyan-400">
+                MK
+              </span>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-white">Mohit Kumar</h3>
+              <p className="text-cyan-500/60 font-mono text-xs uppercase tracking-wider mt-1">
+                Software Developer
+              </p>
+            </div>
+          </div>
 
           <div className="space-y-4">
-            <p className="text-white font-mono text-sm tracking-widest uppercase">
-              Expertise & Skills
-            </p>
-            <div className="grid grid-cols-2 gap-4">
-              {technologies.map((tech) => (
-                <div
-                  key={tech.name}
-                  className="flex items-center gap-3 group text-slate-400 hover:text-cyan-400 transition-colors"
-                >
-                  <span className="text-cyan-400/50 group-hover:text-cyan-400 transition-all font-mono text-xs">
-                    0x
-                  </span>
-                  <span className="font-sans text-base">{tech.name}</span>
-                </div>
-              ))}
+            <div className="flex items-center gap-3 text-slate-400">
+              <svg
+                className="w-5 h-5 text-cyan-500/50"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              <span className="text-xs font-mono uppercase tracking-widest">
+                India
+              </span>
+            </div>
+            <div className="flex items-center gap-3 text-slate-400">
+              <svg
+                className="w-5 h-5 text-cyan-500/50"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+              <span className="text-xs font-mono uppercase tracking-widest">
+                IIT Jodhpur
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Profile Image with Premium Frame */}
-        <div className="flex items-start justify-center lg:justify-end">
-          <div className="relative group max-w-[280px]">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-slate-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-            <div className="relative aspect-square rounded-lg overflow-hidden border-2 border-cyan-500/20 bg-slate-900 shadow-2xl">
-              <div className="absolute inset-0 bg-cyan-500/10 group-hover:bg-transparent transition-colors duration-500" />
-              <img
-                src="/unnamed.jpg"
-                alt="Mohit Kumar"
-                className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100"
-              />
+        {/* Right Column - Cleaner Bio */}
+        <div className="space-y-8">
+          <div className="space-y-6">
+            <p className="text-slate-300 leading-relaxed text-lg">
+              I’m Mohit, a computer science graduate from{" "}
+              <span className="text-cyan-400">IIT Jodhpur</span> focused on
+              building{" "}
+              <span className="text-white">scalable backend systems</span>. I
+              enjoy working close to system internals and understanding how
+              software behaves under real-world constraints.
+            </p>
+            <p className="text-slate-400 leading-relaxed">
+              During my research, I explored distributed systems and
+              performance-oriented design. I aim to grow as a backend engineer,
+              building secure, performant, and maintainable systems that scale
+              reliably.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+            <div className="space-y-3">
+              <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-cyan-500/80">
+                Engineering Approach
+              </h4>
+              <ul className="space-y-2 text-sm text-slate-400">
+                <li>• Prioritize simplicity over complexity</li>
+                <li>• Design for latency and reliability</li>
+                <li>• Write maintainable, readable code</li>
+              </ul>
             </div>
-            {/* Design overlap */}
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 border-r-2 border-b-2 border-cyan-500/30 rounded-br-lg -z-10 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
-            <div className="absolute -top-4 -left-4 w-24 h-24 border-l-2 border-t-2 border-cyan-500/30 rounded-tl-lg -z-10 group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            <div className="space-y-3">
+              <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-cyan-500/80">
+                Currently Exploring
+              </h4>
+              <p className="text-sm text-slate-400 leading-relaxed">
+                Distributed systems, message-driven architectures, and
+                microservices scalability.
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-4">
+            <a
+              href="https://drive.google.com/uc?export=download&id=1IIoEg_9fFe5Q2cTfudjwlX2-e6fv5t4l"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-slate-700 text-slate-300 font-mono text-sm hover:border-cyan-500/50 hover:text-cyan-400 transition-all rounded shadow-sm hover:bg-cyan-500/5"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <span>Resume (PDF)</span>
+            </a>
           </div>
         </div>
       </div>

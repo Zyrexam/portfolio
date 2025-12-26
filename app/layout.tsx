@@ -34,7 +34,7 @@ export default function RootLayout({
       <body
         className={`${_inter.variable} ${_playfair.variable} ${_jetbrains.variable} font-sans antialiased text-foreground bg-background`}
       >
-        <CustomCursor/>
+        {/* <CustomCursor/> */}
         <CursorGlow />
         {children}
         <Analytics />

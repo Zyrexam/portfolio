@@ -39,10 +39,10 @@ export default function Experience() {
 
   return (
     <section id="experience" className="space-y-12 py-20">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 mb-12">
         <h2 className="text-3xl font-serif font-bold text-white">
-          <span className="text-cyan-400 font-mono text-lg mr-2">02.</span>
-          Experience
+          <span className="text-cyan-400 font-mono text-lg mr-2">03.</span>
+          Where I've Worked
         </h2>
         <div className="h-[1px] flex-1 bg-slate-700/50 max-w-md hidden sm:block" />
       </div>

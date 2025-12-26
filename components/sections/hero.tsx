@@ -8,12 +8,10 @@ export default function Hero() {
         Hi, my name is
       </p>
 
-      {/* Name */}
+      {/* Name & Tagline */}
       <div className="space-y-2">
         <h1 className="text-5xl md:text-7xl font-serif font-bold text-white tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
-          <span className="bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-            Mohit Kumar
-          </span>
+          Mohit Kumar
         </h1>
         <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-400/80 tracking-tight leading-tight animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
           I build scalable, full-stack systems.
@@ -22,12 +20,10 @@ export default function Hero() {
 
       {/* Description */}
       <p className="max-w-2xl text-slate-400/90 leading-relaxed text-lg animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-300">
-        I’m a <span className="text-white">software developer</span> and
-        undergraduate researcher at{" "}
-        <span className="text-cyan-400/90">IIT Jodhpur</span>, focused on
-        designing and building end-to-end applications — from backend
-        architecture and data layers to user-facing interfaces — with an
-        emphasis on scalability, performance, and reliability.
+        Backend-focused software developer based in{" "}
+        <span className="text-white">India</span>. I’m focused on building
+        reliable services and end-to-end applications designed to perform well
+        under real-world constraints.
       </p>
 
       {/* CTA */}
