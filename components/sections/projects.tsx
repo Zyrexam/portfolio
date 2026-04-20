@@ -66,19 +66,19 @@ const GitHubIcon = () => (
 
 export default function Projects() {
   return (
-    <section id="projects" className="mt-28 max-w-4xl pt-16">
-      <div className="section-label mb-10">Projects</div>
+    <section id="projects" className="mt-24 max-w-4xl pt-12 sm:mt-28 sm:pt-16">
+      <div className="section-label mb-8 sm:mb-10">Projects</div>
       <div className="border-t border-white/8">
         {projects.map((project, index) => {
           const badge = typeBadge[project.type];
           return (
             <div
               key={project.id}
-              className="group grid gap-6 border-b border-white/8 py-8 md:grid-cols-[1fr_auto]"
+              className="group grid gap-4 border-b border-white/8 py-6 sm:gap-6 sm:py-8 md:grid-cols-[1fr_auto]"
             >
               <div>
                 {/* Number + badge */}
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                   <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                     {String(index + 1).padStart(2, "0")}
                   </p>
@@ -87,11 +87,11 @@ export default function Projects() {
                   </span>
                 </div>
 
-                <h3 className="mt-3 font-serif text-[2rem] leading-none text-foreground">
+                <h3 className="mt-3 font-serif text-[1.65rem] leading-none text-foreground sm:text-[2rem]">
                   {project.title}
                 </h3>
 
-                <p className="mt-4 max-w-2xl text-[0.95rem] leading-[1.8] text-muted-foreground">
+                <p className="mt-4 max-w-2xl text-[0.92rem] leading-[1.75] text-muted-foreground sm:text-[0.95rem] sm:leading-[1.8]">
                   {project.description}
                 </p>
 
@@ -102,7 +102,7 @@ export default function Projects() {
                 </div>
 
                 {/* Links row */}
-                <div className="mt-5 flex items-center gap-3">
+                <div className="mt-5 flex flex-wrap items-center gap-3">
                   {project.github && (
                     <a
                       href={project.github}
@@ -134,7 +134,7 @@ export default function Projects() {
               </div>
 
               {/* Arrow */}
-              <div className="flex items-start pt-10 text-muted-foreground">
+              <div className="hidden items-start pt-10 text-muted-foreground md:flex">
                 ↗
               </div>
             </div>

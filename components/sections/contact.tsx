@@ -34,15 +34,15 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="mt-28 max-w-4xl border-t border-white/8 pt-20">
-      <div className="section-label mb-10">Contact</div>
+    <section id="contact" className="mt-24 max-w-4xl border-t border-white/8 pt-16 sm:mt-28 sm:pt-20">
+      <div className="section-label mb-8 sm:mb-10">Contact</div>
       <div className="space-y-4">
-        <h2 className="max-w-3xl font-serif text-4xl leading-[1.02] tracking-tight text-foreground sm:text-5xl">
+        <h2 className="max-w-3xl font-serif text-[2.2rem] leading-[1.02] tracking-tight text-foreground sm:text-5xl">
           Open to backend roles,
           <br />
           projects, and <span className="italic text-[#d3c08a]">good teams.</span>
         </h2>
-        <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
           If you think I might be a fit, feel free to reach out.
         </p>
       </div>

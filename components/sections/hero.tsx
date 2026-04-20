@@ -2,26 +2,26 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="flex min-h-[58vh] max-w-4xl flex-col justify-end pb-6 pt-10"
+      className="flex min-h-[52vh] max-w-4xl flex-col justify-end pb-4 pt-6 sm:min-h-[58vh] sm:pb-6 sm:pt-10"
     >
       {/* Pulsing dot + label */}
-      <div className="section-label mb-8 flex items-center gap-2.5">
+      <div className="section-label mb-6 flex items-center gap-2.5 sm:mb-8">
         <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#c8b98a] animate-pulse" />
         Lets build something great together.
       </div>
 
-      <h1 className="font-serif text-6xl leading-[0.92] tracking-tight text-foreground sm:text-7xl md:text-[7.5rem]">
+      <h1 className="font-serif text-5xl leading-[0.92] tracking-tight text-foreground min-[420px]:text-6xl sm:text-7xl md:text-[7.5rem]">
         Mohit
         <br />
         <em className="not-italic italic text-[#d3c08a]">Kumar</em>
       </h1>
-      <p className="mt-8 max-w-xl text-lg leading-[1.75] text-muted-foreground sm:text-[1.05rem]">
+      <p className="mt-6 max-w-xl text-base leading-[1.75] text-muted-foreground sm:mt-8 sm:text-[1.05rem]">
         CS undergrad at{" "}
         <span className="text-foreground font-medium">IIT Jodhpur</span>
         {" "}— I build backend systems, distributed APIs, and data pipelines
         that hold up under real load. Currently open to SDE roles.
       </p>
-      <div className="mt-10 flex flex-wrap gap-3">
+      <div className="mt-8 grid gap-3 sm:mt-10 sm:flex sm:flex-wrap">
         <a href="#projects" className="mono-button mono-button--accent">
           Selected work
         </a>

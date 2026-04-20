@@ -8,10 +8,12 @@ import {
   SiGithub,
   SiGithubactions,
   SiGooglecloud,
+  SiIntellijidea,
   SiJavascript,
   SiKotlin,
   SiLinux,
   SiMysql,
+  SiOllama,
   SiPostgresql,
   SiPostman,
   SiPython,
@@ -20,14 +22,14 @@ import {
   SiSpringboot,
   SiTypescript,
 } from "react-icons/si";
-import { FaAws } from "react-icons/fa";
+import { FaAws, FaJava } from "react-icons/fa";
 import { VscVscode } from "react-icons/vsc";
 
 const skillGroups = [
   {
     title: "Languages",
     items: [
-      { name: "Java", icon: null },
+      { name: "Java", icon: FaJava },
       { name: "Python", icon: SiPython },
       { name: "C++", icon: SiCplusplus },
       { name: "Kotlin", icon: SiKotlin },
@@ -60,9 +62,10 @@ const skillGroups = [
       { name: "Linux", icon: SiLinux },
       { name: "Postman", icon: SiPostman },
       { name: "GitHub Actions", icon: SiGithubactions },
-      { name: "IntelliJ IDEA", icon: null },
+      { name: "IntelliJ IDEA", icon: SiIntellijidea },
       { name: "Android Studio", icon: SiAndroidstudio },
       { name: "VS Code", icon: VscVscode },
+      { name: "Ollama", icon: SiOllama },
     ],
   },
   {
@@ -86,8 +89,8 @@ function SkillIcon({
   icon: React.ComponentType<{ className?: string }> | null;
 }) {
   return (
-    <div className="flex flex-col items-center gap-2 rounded-lg border border-white/8 bg-white/[0.03] p-3 transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.06]">
-      <div className="flex h-8 w-8 items-center justify-center text-2xl text-muted-foreground">
+    <div className="flex min-h-[96px] flex-col items-center gap-2 rounded-lg border border-white/8 bg-white/[0.03] p-3 transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.06] sm:min-h-[104px]">
+      <div className="flex h-8 w-8 items-center justify-center text-xl text-muted-foreground sm:text-2xl">
         {Icon ? (
           <Icon className="h-6 w-6" />
         ) : (
@@ -96,7 +99,7 @@ function SkillIcon({
           </span>
         )}
       </div>
-      <span className="text-center font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">
+      <span className="text-center font-mono text-[8px] uppercase leading-tight tracking-[0.08em] text-muted-foreground sm:text-[9px] sm:tracking-[0.1em]">
         {name}
       </span>
     </div>
@@ -105,18 +108,18 @@ function SkillIcon({
 
 export default function Skills() {
   return (
-    <section id="skills" className="mt-28 max-w-4xl pt-16">
-      <div className="section-label mb-10">Skills</div>
+    <section id="skills" className="mt-24 max-w-4xl pt-12 sm:mt-28 sm:pt-16">
+      <div className="section-label mb-8 sm:mb-10">Skills</div>
       <div className="grid gap-6 md:grid-cols-2">
         {skillGroups.map((group) => (
           <div
             key={group.title}
-            className="rounded-xl border border-white/8 bg-white/[0.02] p-6"
+            className="rounded-xl border border-white/8 bg-white/[0.02] p-4 sm:p-6"
           >
             <h3 className="mb-5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               {group.title}
             </h3>
-            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2 min-[420px]:grid-cols-3 sm:grid-cols-4">
               {group.items.map((item) => (
                 <SkillIcon key={item.name} name={item.name} icon={item.icon} />
               ))}

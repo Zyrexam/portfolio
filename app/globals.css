@@ -122,6 +122,16 @@
   transform: translateY(-1px);
 }
 
+.mono-button--accent {
+  border-color: rgba(211, 192, 138, 0.28);
+  background: rgba(211, 192, 138, 0.06);
+}
+
+.mono-button--accent:hover {
+  border-color: rgba(211, 192, 138, 0.4);
+  background: rgba(211, 192, 138, 0.1);
+}
+
 .mono-chip {
   display: inline-flex;
   align-items: center;
@@ -132,6 +142,24 @@
   letter-spacing: 0.05em;
   color: #d3c08a;
   background: rgba(255, 255, 255, 0.02);
+}
+
+@media (max-width: 640px) {
+  .section-label {
+    gap: 0.65rem;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+
+  .section-label::after {
+    width: 26px;
+  }
+
+  .mono-button {
+    width: 100%;
+    justify-content: center;
+    padding-inline: 1rem;
+  }
 }
 
 ::-webkit-scrollbar {
