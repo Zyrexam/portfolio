@@ -11,17 +11,27 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error();
+
       setSubmitStatus("success");
       setFormData({ name: "", email: "", message: "" });
-
-      setTimeout(() => setSubmitStatus(null), 3000);
-    }, 1200);
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus(null), 4000);
+    }
   };
 
   const handleChange = (
@@ -102,8 +112,13 @@ export default function Contact() {
         </div>
 
         {submitStatus === "success" && (
-          <p className="text-sm text-muted-foreground">
-            Message sent successfully. I&apos;ll get back to you soon.
+          <p className="text-sm text-emerald-400">
+            Message sent. I'll get back to you soon.
+          </p>
+        )}
+        {submitStatus === "error" && (
+          <p className="text-sm text-red-400">
+            Something went wrong. Email me directly.
           </p>
         )}
       </form>
