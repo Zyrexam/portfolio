@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+
 const quotes = [
-  "Designing scalable backend systems.",
-  "Engineering for performance and reliability.",
-  "Building systems that scale under load.",
-  "Optimizing backend architecture.",
-  "Focused on correctness and efficiency.",
+  "Building systems that don't crash (hopefully).",
+  "CS student @ IIT Jodhpur.",
+  "Distinguishing 'bugs' from 'features' since 2020.",
+  "Probably debugging something right now.",
+  "Eager to build, learn, and break things safely.",
 ];
 
 export default function SidebarProfile() {
@@ -59,26 +60,35 @@ export default function SidebarProfile() {
   return (
     <div className={`space-y-8 ${isFixed ? "fixed top-24 right-8" : ""}`}>
       {/* Profile Image */}
-      <div className="relative w-56 h-56 rounded-lg overflow-hidden border-2 border-cyan-500/30 hover:border-cyan-500/50 transition-colors mx-auto">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-cyan-600 opacity-20" />
+      <div className="relative w-56 h-56 rounded-lg overflow-hidden border-2 border-cyan-500/30 group hover:border-cyan-400 hover:skew-y-2 hover:rotate-1 transition-all duration-500 mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-cyan-600 opacity-20 group-hover:opacity-10 transition-opacity" />
         <img
           src="/unnamed.jpg"
           alt="Profile"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
+        {/* Decorative scanline overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] z-10 bg-[length:100%_2px,3px_100%] pointer-events-none" />
       </div>
 
       {/* Profile Text */}
-      <div className="text-center">
-        <h2 className="text-2xl font-serif font-bold text-white tracking-tight">
+      <div className="text-center px-4">
+        <h2 className="text-2xl font-serif font-bold text-white tracking-tight flex items-center justify-center gap-2">
           Mohit Kumar
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
         </h2>
-        <p className="mt-3 text-sm text-slate-400 font-mono min-h-[1.5em] leading-relaxed">
-          {displayText}
-          <span className="inline-block w-[1ch] animate-pulse text-cyan-400 font-bold">
-            |
+        <p className="mt-3 text-[13px] text-slate-400 font-mono min-h-[3em] leading-relaxed italic">
+          "{displayText}"
+          <span className="inline-block w-[1ch] animate-pulse text-cyan-400 font-bold ml-1">
+            _
           </span>
         </p>
+
+        {/* Small quirk tag */}
+        <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-cyan-950/30 border border-cyan-900/50 rounded-full text-[10px] font-mono text-cyan-500/80">
+          <span className="w-1 h-1 rounded-full bg-cyan-500" />
+          Always Learning
+        </div>
       </div>
 
       {/* Social Links */}

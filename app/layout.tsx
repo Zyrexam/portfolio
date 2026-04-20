@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { DM_Mono, DM_Serif_Display, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import CursorGlow from "@/components/ui/cursor-glow";
-import CustomCursor from "@/components/ui/custom-cursor";
 import "./globals.css";
 
-const _inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const _playfair = Playfair_Display({
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
+  weight: "400",
   variable: "--font-serif",
 });
-const _jetbrains = JetBrains_Mono({
+const dmMono = DM_Mono({
   subsets: ["latin"],
+  weight: ["400", "500"],
   variable: "--font-mono",
 });
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Mohit Kumar",
   },
   description:
-    "Portfolio of Mohit Kumar, a software developer specialized in building scalable backend systems and machine learning applications.",
+    "Portfolio of Mohit Kumar, a backend systems engineer focused on reliability, latency, and distributed systems under real-world constraints.",
 };
 
 export default function RootLayout({
@@ -32,10 +32,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${_inter.variable} ${_playfair.variable} ${_jetbrains.variable} font-sans antialiased text-foreground bg-background`}
+        className={`${inter.variable} ${dmSerif.variable} ${dmMono.variable} bg-background text-foreground`}
       >
-        {/* <CustomCursor/> */}
-        <CursorGlow />
         {children}
         <Analytics />
       </body>

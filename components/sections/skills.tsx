@@ -1,118 +1,124 @@
-"use client";
-const skillCategories = [
+import {
+  SiAndroidstudio,
+  SiCplusplus,
+  SiDocker,
+  SiFastapi,
+  SiFirebase,
+  SiGit,
+  SiGithub,
+  SiGithubactions,
+  SiGooglecloud,
+  SiJavascript,
+  SiKotlin,
+  SiLinux,
+  SiMysql,
+  SiPostgresql,
+  SiPostman,
+  SiPython,
+  SiReact,
+  SiSolidity,
+  SiSpringboot,
+  SiTypescript,
+} from "react-icons/si";
+import { FaAws } from "react-icons/fa";
+import { VscVscode } from "react-icons/vsc";
+
+const skillGroups = [
   {
     title: "Languages",
     items: [
-      "Java",
-      "Python",
-      "C++",
-      "Kotlin",
-      "SQL",
-      "Solidity",
-      "JavaScript",
-      "TypeScript",
+      { name: "Java", icon: null },
+      { name: "Python", icon: SiPython },
+      { name: "C++", icon: SiCplusplus },
+      { name: "Kotlin", icon: SiKotlin },
+      { name: "JavaScript", icon: SiJavascript },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "SQL", icon: null },
+      { name: "Solidity", icon: SiSolidity },
     ],
   },
   {
-    title: "Core Backend Strengths",
+    title: "Frameworks & Cloud",
     items: [
-      "Java",
-      "Spring Boot",
-      "PostgreSQL",
-      "MySQL",
-      "Docker",
-      "GCP",
-      "REST APIs",
+      { name: "Spring Boot", icon: SiSpringboot },
+      { name: "React", icon: SiReact },
+      { name: "FastAPI", icon: SiFastapi },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "MySQL", icon: SiMysql },
+      { name: "Firebase", icon: SiFirebase },
+      { name: "AWS S3", icon: FaAws },
+      { name: "GCP", icon: SiGooglecloud },
+      { name: "REST APIs", icon: null },
     ],
   },
   {
-    title: "Databases & Storage",
+    title: "Tools & DevOps",
     items: [
-      "PostgreSQL",
-      "MySQL",
-      "Firebase Realtime DB",
-      "Relational Databases",
-      "Google Cloud Storage",
+      { name: "Docker", icon: SiDocker },
+      { name: "Git", icon: SiGit },
+      { name: "GitHub", icon: SiGithub },
+      { name: "Linux", icon: SiLinux },
+      { name: "Postman", icon: SiPostman },
+      { name: "GitHub Actions", icon: SiGithubactions },
+      { name: "IntelliJ IDEA", icon: null },
+      { name: "Android Studio", icon: SiAndroidstudio },
+      { name: "VS Code", icon: VscVscode },
     ],
   },
   {
-    title: "Android Development",
+    title: "Systems & Research",
     items: [
-      "Android SDK",
-      "Kotlin",
-      "Java (Android)",
-      "Firebase Authentication",
-      "Realtime Database",
-      "REST API Integration",
-    ],
-  },
-  {
-    title: "Core Foundations",
-    items: [
-      "Data Structures & Algorithms",
-      "Operating Systems",
-      "DBMS",
-      "Computer Networks",
-      "Distributed Database Systems",
-    ],
-  },
-  {
-    title: "Developer Tools",
-    items: [
-      "Git & GitHub",
-      "Linux / UNIX",
-      "Postman",
-      "IntelliJ IDEA",
-      "Android Studio",
-      "VS Code",
-      "GitHub Actions",
-    ],
-  },
-  {
-    title: "Currently Exploring",
-    items: [
-      "System Design Fundamentals",
-      "Distributed Systems Concepts",
-      "Microservices Architecture",
-      "Scalability & Load Handling",
-      "Caching Strategies",
+      { name: "Distributed Systems", icon: null },
+      { name: "System Design", icon: null },
+      { name: "Federated Learning", icon: null },
+      { name: "Caching Strategies", icon: null },
+      { name: "Scalability", icon: null },
+      { name: "Flower (FL)", icon: null },
     ],
   },
 ];
 
+function SkillIcon({
+  name,
+  icon: Icon,
+}: {
+  name: string;
+  icon: React.ComponentType<{ className?: string }> | null;
+}) {
+  return (
+    <div className="flex flex-col items-center gap-2 rounded-lg border border-white/8 bg-white/[0.03] p-3 transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.06]">
+      <div className="flex h-8 w-8 items-center justify-center text-2xl text-muted-foreground">
+        {Icon ? (
+          <Icon className="h-6 w-6" />
+        ) : (
+          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/60">
+            {name.slice(0, 2).toUpperCase()}
+          </span>
+        )}
+      </div>
+      <span className="text-center font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">
+        {name}
+      </span>
+    </div>
+  );
+}
+
 export default function Skills() {
   return (
-    <section id="skills" className="space-y-12 py-20">
-      <div className="flex items-center gap-4">
-        <h2 className="text-3xl font-serif font-bold text-white">
-          <span className="text-cyan-400 font-mono text-lg mr-2">02.</span>
-          Technical Skills
-        </h2>
-        <div className="h-[1px] flex-1 bg-slate-700/50 max-w-md hidden sm:block" />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:max-w-4xl">
-        {skillCategories.map((group) => (
+    <section id="skills" className="mt-28 max-w-4xl pt-16">
+      <div className="section-label mb-10">Skills</div>
+      <div className="grid gap-6 md:grid-cols-2">
+        {skillGroups.map((group) => (
           <div
             key={group.title}
-            className="group p-6 rounded-lg bg-slate-800/40 border border-cyan-500/10 hover:border-cyan-500/20 transition-all duration-300"
+            className="rounded-xl border border-white/8 bg-white/[0.02] p-6"
           >
-            <h3 className="text-lg font-mono font-medium text-cyan-400 mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+            <h3 className="mb-5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               {group.title}
             </h3>
-
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
               {group.items.map((item) => (
-                <span
-                  key={item}
-                  className="px-3 py-1.5 bg-slate-900/50 text-slate-300 rounded text-xs font-mono border border-slate-700/50 
-                             transition-all duration-300 cursor-default
-                             hover:text-cyan-400 hover:border-cyan-500/20 
-                             hover:bg-cyan-500/5"
-                >
-                  {item}
-                </span>
+                <SkillIcon key={item.name} name={item.name} icon={item.icon} />
               ))}
             </div>
           </div>

@@ -1,39 +1,60 @@
-"use client";
-
 export default function Hero() {
   return (
-    <section className="space-y-6 py-24 flex flex-col items-start px-0">
-      {/* Intro */}
-      <p className="text-cyan-400 font-mono text-sm tracking-widest animate-in fade-in slide-in-from-bottom-3 duration-700">
-        Hi, my name is
-      </p>
-
-      {/* Name & Tagline */}
-      <div className="space-y-2">
-        <h1 className="text-5xl md:text-7xl font-serif font-bold text-white tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
-          Mohit Kumar
-        </h1>
-        <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-400/80 tracking-tight leading-tight animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
-          I build scalable, full-stack systems.
-        </h2>
+    <section
+      id="top"
+      className="flex min-h-[58vh] max-w-4xl flex-col justify-end pb-6 pt-10"
+    >
+      {/* Pulsing dot + label */}
+      <div className="section-label mb-8 flex items-center gap-2.5">
+        <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#c8b98a] animate-pulse" />
+        Lets build something great together.
       </div>
 
-      {/* Description */}
-      <p className="max-w-2xl text-slate-400/90 leading-relaxed text-lg animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-300">
-        Backend-focused software developer based in{" "}
-        <span className="text-white">India</span>. I’m focused on building
-        reliable services and end-to-end applications designed to perform well
-        under real-world constraints.
+      <h1 className="font-serif text-6xl leading-[0.92] tracking-tight text-foreground sm:text-7xl md:text-[7.5rem]">
+        Mohit
+        <br />
+        <em className="not-italic italic text-[#d3c08a]">Kumar</em>
+      </h1>
+      <p className="mt-8 max-w-xl text-lg leading-[1.75] text-muted-foreground sm:text-[1.05rem]">
+        CS undergrad at{" "}
+        <span className="text-foreground font-medium">IIT Jodhpur</span>
+        {" "}— I build backend systems, distributed APIs, and data pipelines
+        that hold up under real load. Currently open to SDE roles.
       </p>
-
-      {/* CTA */}
-      <div className="pt-6 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500">
+      <div className="mt-10 flex flex-wrap gap-3">
+        <a href="#projects" className="mono-button mono-button--accent">
+          Selected work
+        </a>
         <a
-          href="#projects"
-          className="group relative inline-block px-8 py-3 overflow-hidden border border-cyan-500 text-cyan-400 font-mono text-sm transition-all rounded hover:text-white"
+          href="https://github.com/Zyrexam"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mono-button"
         >
-          <div className="absolute inset-0 bg-cyan-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          <span className="relative z-10">View my projects →</span>
+          GitHub ↗
+        </a>
+        <a
+          href="https://leetcode.com/u/mohitkumar4/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mono-button"
+        >
+          LeetCode ↗
+        </a>
+        <a
+          href="https://www.linkedin.com/in/mohit-kumar-sp/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mono-button"
+        >
+          LinkedIn ↗
+        </a>
+        <a
+          href="/resume.pdf"
+          download
+          className="mono-button"
+        >
+          Resume ↓
         </a>
       </div>
     </section>
