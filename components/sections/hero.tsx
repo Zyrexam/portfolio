@@ -16,10 +16,10 @@ export default function Hero() {
         <em className="not-italic italic text-[#d3c08a]">Kumar</em>
       </h1>
       <p className="mt-6 max-w-xl text-base leading-[1.75] text-muted-foreground sm:mt-8 sm:text-[1.05rem]">
-        CS undergrad at{" "}
+        Backend engineer at{" "}
         <span className="text-foreground font-medium">IIT Jodhpur</span>
-        {" "}— I build backend systems, distributed APIs, and data pipelines
-        that hold up under real load. Currently open to SDE roles.
+        {" "}— I build distributed systems, async pipelines, and
+        high-throughput APIs that hold up under real load. Currently open to backend roles.
       </p>
       <div className="mt-8 grid gap-3 sm:mt-10 sm:flex sm:flex-wrap">
         <a href="#projects" className="mono-button mono-button--accent">
@@ -50,8 +50,9 @@ export default function Hero() {
           LinkedIn ↗
         </a>
         <a
-          href="/resume.pdf"
-          download
+          href="https://drive.google.com/uc?export=download&id=1iVJ1ma8kdIIKEaL6gGrKKkAr1adIWlFO"
+          target="_blank"
+          rel="noopener noreferrer"
           className="mono-button"
         >
           Resume ↓

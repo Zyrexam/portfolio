@@ -4,17 +4,18 @@ export default function About() {
       <div className="section-label mb-10">About</div>
       <div className="max-w-2xl space-y-4">
         <p className="font-serif text-[2rem] leading-[1.3] tracking-tight text-foreground">
-          I like building backend systems that are{" "}
+          Backend engineer who builds systems that are{" "}
           <span className="italic text-[#d3c08a]">simple, reliable,</span> and
           fast.
         </p>
         <p className="text-lg leading-[1.9] text-muted-foreground">
-          Backend-focused engineer from IIT Jodhpur. Most of my work is around
-          distributed systems, APIs, and performance-critical applications.
+          I design and build backend infrastructure — distributed systems,
+          async pipelines, and payment-grade APIs. Most of my work lives at the
+          intersection of reliability, performance, and clean system design.
         </p>
         <p className="text-lg leading-[1.9] text-muted-foreground">
-          I believe good engineering is invisible. It just works, for longer
-          than anyone expected.
+          Good engineering is invisible. It just works, for longer than anyone
+          expected.
         </p>
       </div>
     </section>

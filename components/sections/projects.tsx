@@ -1,25 +1,25 @@
 const projects = [
   {
     id: 1,
-    title: "Well-Log-Analyzer",
+    title: "Webhook Delivery System",
     description:
-      "Full-stack sensor data platform processing 50,000+ rows across 100+ channels. Reduced frontend rendering latency by 90% via Intelligent Windowed Downsampling and hit 10,000+ rows/sec backend throughput with async pipelines. Ships a Groq-powered GeoBot (Llama 3.3-70B) with streaming responses and persistent chat history.",
-    tags: ["React", "FastAPI", "Python", "PostgreSQL", "AWS S3", "Groq"],
-    github: "https://github.com/Zyrexam/Well-Log-Analyzer",
-    live: "https://well-log-analyzer.vercel.app/",
-    type: "live" as const,
-  },
-  {
-    id: 2,
-    title: "CloudVault",
-    description:
-      "Full-stack file management platform with Spring Boot and React. Integrated GCP Cloud Storage and Firebase Realtime DB for per-user metadata. Achieved sub-500ms upload latency for 10MB files under 50 concurrent users. Secured with Firebase ID-token auth and stateless Spring Security.",
-    tags: ["Java", "Spring Boot", "React", "Firebase", "GCP"],
-    github: "https://github.com/Zyrexam/CloudVault.git",
+      "Async webhook delivery engine (FastAPI + PostgreSQL + Redis) returning 202 Accepted on ingest. Models lifecycle as PENDING → IN FLIGHT → DELIVERED → DEAD with a watchdog rescuing stale jobs every 30s via updated-at threshold. Exponential backoff retry scheduler (2s → 32s, max 5 attempts) using Redis sorted set as delay queue. Circuit breaker (CLOSED → OPEN → HALF-OPEN) halting delivery after 5 failures with 60s recovery cooldown. Secures payloads with per-subscription HMAC-SHA256 signatures.",
+    tags: ["FastAPI", "PostgreSQL", "Redis", "Python"],
+    github: "https://github.com/Zyrexam/Webhook-Delivery-System",
     live: null,
     type: "github" as const,
   },
-    {
+  {
+    id: 2,
+    title: "Payment Idempotency Proxy",
+    description:
+      "Stateless payment proxy (FastAPI + Redis + PostgreSQL + Prometheus + Grafana) containerized with Docker Compose — one command deploys all 5 services. Distributed locks via Redis SET NX + Lua atomic release preventing race conditions on concurrent requests; validated 20 simultaneous requests producing exactly 1 transaction with zero duplicate charges. PostgreSQL audit trail (amounts in cents) with Pydantic validation and SHA-256 tamper detection. Redis caching (24h TTL, 95.9% hit rate) with Prometheus metrics exported to Grafana.",
+    tags: ["FastAPI", "Redis", "PostgreSQL", "Docker", "Prometheus", "Grafana"],
+    github: "https://github.com/Zyrexam/payment-idempotency-proxy",
+    live: null,
+    type: "github" as const,
+  },
+  {
     id: 3,
     title: "Spring Email Scheduler",
     description:
@@ -31,17 +31,26 @@ const projects = [
   },
   {
     id: 4,
-    title: "FedMeet",
+    title: "Well-Log-Analyzer",
     description:
-      "Federated learning framework for human activity recognition using multi-sensor IMU data (smartwatch + earables). Implemented gated sensor fusion and BiLSTM to handle non-IID distributions. Achieved 87.97% accuracy — outperforming FedProx, FedPer, and ClusterFL. Co-authored ACM publication.",
-    tags: ["Python", "Flower", "BiLSTM", "Federated Learning"],
-    github: "https://github.com/Zyrexam/SensorFlow-Model.git",
-    live: "https://dl.acm.org/doi/10.1145/3772290.3772295",
-    type: "research" as const,
+      "Full-stack sensor data platform processing 50,000+ rows across 100+ channels. Reduced frontend rendering latency by 90% via Intelligent Windowed Downsampling and hit 10,000+ rows/sec backend throughput with async pipelines. Ships a Groq-powered GeoBot (Llama 3.3-70B) with streaming responses and persistent chat history.",
+    tags: ["React", "FastAPI", "Python", "PostgreSQL", "AWS S3", "Groq"],
+    github: "https://github.com/Zyrexam/Well-Log-Analyzer",
+    live: "https://well-log-analyzer.vercel.app/",
+    type: "live" as const,
   },
-
   {
     id: 5,
+    title: "CloudVault",
+    description:
+      "Full-stack file management platform with Spring Boot and React. Integrated GCP Cloud Storage and Firebase Realtime DB for per-user metadata. Achieved sub-500ms upload latency for 10MB files under 50 concurrent users. Secured with Firebase ID-token auth and stateless Spring Security.",
+    tags: ["Java", "Spring Boot", "React", "Firebase", "GCP"],
+    github: "https://github.com/Zyrexam/CloudVault.git",
+    live: null,
+    type: "github" as const,
+  },
+  {
+    id: 6,
     title: "Secure Contract Pipeline",
     description:
       "Automated pipeline for Solidity smart contract generation, vulnerability analysis, and LLM-based patching. Combines static analysis tooling with domain-specific prompting to detect and repair contract vulnerabilities end-to-end.",
@@ -49,6 +58,16 @@ const projects = [
     github: "https://github.com/Zyrexam/Smart-Contract-Pipeline-1.git",
     live: null,
     type: "github" as const,
+  },
+  {
+    id: 7,
+    title: "FedMeet",
+    description:
+      "Federated learning framework for human activity recognition using multi-sensor IMU data (smartwatch + earables). Implemented gated sensor fusion and BiLSTM to handle non-IID distributions. Achieved 87.97% accuracy — outperforming FedProx, FedPer, and ClusterFL. Co-authored ACM publication.",
+    tags: ["Python", "Flower", "BiLSTM", "Federated Learning"],
+    github: "https://github.com/Zyrexam/SensorFlow-Model.git",
+    live: "https://dl.acm.org/doi/10.1145/3772290.3772295",
+    type: "research" as const,
   },
 ];
 
