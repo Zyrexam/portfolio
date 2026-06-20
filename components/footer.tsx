@@ -1,9 +1,43 @@
+"use client";
+
+import { personal } from "@/lib/data";
+
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-white/8">
-      <div className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-6 py-6 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:px-8">
-        <p>Mohit Kumar — Software Developer</p>
-        <p>IIT Jodhpur · 2026</p>
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-inner">
+          <div className="footer-id">
+            <span className="mark">M</span>
+            <div>
+              <div className="name">
+                {personal.name}<span className="dim"> — Backend Engineer</span>
+              </div>
+              <div className="sub">Built with care · IIT Jodhpur</div>
+            </div>
+          </div>
+          <div className="footer-right">
+            <span className="footer-year">IIT Jodhpur · {year}</span>
+            <a className="btn-top arrow-link" href="#top">
+              Back to top
+              <svg
+                className="arrow"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="12" y1="19" x2="12" y2="5" />
+                <polyline points="5 12 12 5 19 12" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );

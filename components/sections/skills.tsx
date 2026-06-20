@@ -1,3 +1,5 @@
+"use client";
+
 import {
   SiAndroidstudio,
   SiCplusplus,
@@ -27,111 +29,129 @@ import {
 } from "react-icons/si";
 import { FaAws, FaJava } from "react-icons/fa";
 import { VscVscode } from "react-icons/vsc";
+import { useReveal } from "@/hooks/use-reveal";
+import { skillGroups } from "@/lib/data";
 
-const skillGroups = [
-  {
-    title: "Languages",
-    items: [
-      { name: "Java", icon: FaJava },
-      { name: "Python", icon: SiPython },
-      { name: "C++", icon: SiCplusplus },
-      { name: "Kotlin", icon: SiKotlin },
-      { name: "JavaScript", icon: SiJavascript },
-      { name: "TypeScript", icon: SiTypescript },
-      { name: "SQL", icon: null },
-      { name: "Solidity", icon: SiSolidity },
-    ],
-  },
-  {
-    title: "Frameworks & Cloud",
-    items: [
-      { name: "Spring Boot", icon: SiSpringboot },
-      { name: "React", icon: SiReact },
-      { name: "FastAPI", icon: SiFastapi },
-      { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "MySQL", icon: SiMysql },
-      { name: "Redis", icon: SiRedis },
-      { name: "Firebase", icon: SiFirebase },
-      { name: "AWS S3", icon: FaAws },
-      { name: "GCP", icon: SiGooglecloud },
-      { name: "REST APIs", icon: null },
-    ],
-  },
-  {
-    title: "Tools & DevOps",
-    items: [
-      { name: "Docker", icon: SiDocker },
-      { name: "Git", icon: SiGit },
-      { name: "GitHub", icon: SiGithub },
-      { name: "Linux", icon: SiLinux },
-      { name: "Postman", icon: SiPostman },
-      { name: "GitHub Actions", icon: SiGithubactions },
-      { name: "Prometheus", icon: SiPrometheus },
-      { name: "Grafana", icon: SiGrafana },
-      { name: "IntelliJ IDEA", icon: SiIntellijidea },
-      { name: "Android Studio", icon: SiAndroidstudio },
-      { name: "VS Code", icon: VscVscode },
-      { name: "Ollama", icon: SiOllama },
-    ],
-  },
-  {
-    title: "Systems & Research",
-    items: [
-      { name: "Distributed Systems", icon: null },
-      { name: "System Design", icon: null },
-      { name: "Federated Learning", icon: null },
-      { name: "Caching Strategies", icon: null },
-      { name: "Scalability", icon: null },
-      { name: "Flower (FL)", icon: null },
-    ],
-  },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  FaJava,
+  SiPython,
+  SiCplusplus,
+  SiKotlin,
+  SiJavascript,
+  SiTypescript,
+  SiSolidity,
+  SiSpringboot,
+  SiReact,
+  SiFastapi,
+  SiPostgresql,
+  SiMysql,
+  SiRedis,
+  SiFirebase,
+  FaAws,
+  SiGooglecloud,
+  SiDocker,
+  SiGit,
+  SiGithub,
+  SiLinux,
+  SiPostman,
+  SiGithubactions,
+  SiPrometheus,
+  SiGrafana,
+  SiIntellijidea,
+  SiAndroidstudio,
+  VscVscode,
+  SiOllama,
+};
 
-function SkillIcon({
+function SkillTag({
   name,
-  icon: Icon,
+  iconName,
 }: {
   name: string;
-  icon: React.ComponentType<{ className?: string }> | null;
+  iconName: string | null;
 }) {
+  const Icon = iconName ? iconMap[iconName] : null;
   return (
-    <div className="flex min-h-[96px] flex-col items-center gap-2 rounded-lg border border-white/8 bg-white/[0.03] p-3 transition-colors duration-150 hover:border-white/15 hover:bg-white/[0.06] sm:min-h-[104px]">
-      <div className="flex h-8 w-8 items-center justify-center text-xl text-muted-foreground sm:text-2xl">
-        {Icon ? (
-          <Icon className="h-6 w-6" />
+    <li className="skill-tag">
+      {Icon ? (
+        <Icon />
+      ) : (
+        <span className="mono">{name.slice(0, 2).toUpperCase()}</span>
+      )}
+      {name}
+    </li>
+  );
+}
+
+function SkillCard({ group, index }: { group: (typeof skillGroups)[number]; index: number }) {
+  const { ref, isIn } = useReveal();
+
+  return (
+    <div
+      ref={ref}
+      className={`skill-card${isIn ? " is-in" : ""}`}
+      style={{
+        opacity: isIn ? undefined : 0,
+        transitionDelay: `${index * 0.08}s`,
+      }}
+    >
+      <div className="skill-head">
+        <h3>{group.title}</h3>
+        {group.learning ? (
+          <span className="skill-badge">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
+            learning
+          </span>
         ) : (
-          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/60">
-            {name.slice(0, 2).toUpperCase()}
+          <span className="skill-count">
+            {String(group.items.length).padStart(2, "0")}
           </span>
         )}
       </div>
-      <span className="text-center font-mono text-[8px] uppercase leading-tight tracking-[0.08em] text-muted-foreground sm:text-[9px] sm:tracking-[0.1em]">
-        {name}
-      </span>
+      <ul className="skill-tags">
+        {group.items.map((item) => (
+          <SkillTag
+            key={item.name}
+            name={item.name}
+            iconName={item.icon}
+          />
+        ))}
+      </ul>
     </div>
   );
 }
 
 export default function Skills() {
+  const { ref: headRef, isIn: headIn } = useReveal();
+
   return (
-    <section id="skills" className="mt-24 max-w-4xl pt-12 sm:mt-28 sm:pt-16">
-      <div className="section-label mb-8 sm:mb-10">Skills</div>
-      <div className="grid gap-6 md:grid-cols-2">
-        {skillGroups.map((group) => (
-          <div
-            key={group.title}
-            className="rounded-xl border border-white/8 bg-white/[0.02] p-4 sm:p-6"
-          >
-            <h3 className="mb-5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              {group.title}
-            </h3>
-            <div className="grid grid-cols-2 gap-2 min-[420px]:grid-cols-3 sm:grid-cols-4">
-              {group.items.map((item) => (
-                <SkillIcon key={item.name} name={item.name} icon={item.icon} />
-              ))}
-            </div>
-          </div>
-        ))}
+    <section id="skills">
+      <div className="container">
+        <div
+          ref={headRef}
+          className={`section-head${headIn ? " is-in" : ""} reveal`}
+        >
+          <span className="idx">04</span>
+          <span className="lbl">Skills</span>
+          <span className="end">Stack &amp; tooling</span>
+        </div>
+
+        <div className="skills-grid">
+          {skillGroups.map((group, i) => (
+            <SkillCard key={group.title} group={group} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );

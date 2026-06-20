@@ -1,81 +1,7 @@
-const projects = [
-  {
-    id: 1,
-    title: "Webhook Delivery System",
-    description:
-      "Async webhook delivery engine (FastAPI + PostgreSQL + Redis) returning 202 Accepted on ingest. Models lifecycle as PENDING → IN FLIGHT → DELIVERED → DEAD with a watchdog rescuing stale jobs every 30s via updated-at threshold. Exponential backoff retry scheduler (2s → 32s, max 5 attempts) using Redis sorted set as delay queue. Circuit breaker (CLOSED → OPEN → HALF-OPEN) halting delivery after 5 failures with 60s recovery cooldown. Secures payloads with per-subscription HMAC-SHA256 signatures.",
-    tags: ["FastAPI", "PostgreSQL", "Redis", "Python"],
-    github: "https://github.com/Zyrexam/Webhook-Delivery-System",
-    live: null,
-    type: "github" as const,
-  },
-  {
-    id: 2,
-    title: "Payment Idempotency Proxy",
-    description:
-      "Stateless payment proxy (FastAPI + Redis + PostgreSQL + Prometheus + Grafana) containerized with Docker Compose — one command deploys all 5 services. Distributed locks via Redis SET NX + Lua atomic release preventing race conditions on concurrent requests; validated 20 simultaneous requests producing exactly 1 transaction with zero duplicate charges. PostgreSQL audit trail (amounts in cents) with Pydantic validation and SHA-256 tamper detection. Redis caching (24h TTL, 95.9% hit rate) with Prometheus metrics exported to Grafana.",
-    tags: ["FastAPI", "Redis", "PostgreSQL", "Docker", "Prometheus", "Grafana"],
-    github: "https://github.com/Zyrexam/payment-idempotency-proxy",
-    live: null,
-    type: "github" as const,
-  },
-  {
-    id: 3,
-    title: "Spring Email Scheduler",
-    description:
-      "Fault-tolerant job scheduling system using Spring Boot and Quartz with MySQL-backed persistence. Supports 50+ concurrent timezone-aware tasks with sub-second execution delays, automatic job recovery, and retry mechanisms.",
-    tags: ["Java", "Spring Boot", "Quartz", "MySQL"],
-    github: "https://github.com/Zyrexam/Spring-EmailScheduler.git",
-    live: null,
-    type: "github" as const,
-  },
-  {
-    id: 4,
-    title: "Well-Log-Analyzer",
-    description:
-      "Full-stack sensor data platform processing 50,000+ rows across 100+ channels. Reduced frontend rendering latency by 90% via Intelligent Windowed Downsampling and hit 10,000+ rows/sec backend throughput with async pipelines. Ships a Groq-powered GeoBot (Llama 3.3-70B) with streaming responses and persistent chat history.",
-    tags: ["React", "FastAPI", "Python", "PostgreSQL", "AWS S3", "Groq"],
-    github: "https://github.com/Zyrexam/Well-Log-Analyzer",
-    live: "https://well-log-analyzer.vercel.app/",
-    type: "live" as const,
-  },
-  {
-    id: 5,
-    title: "CloudVault",
-    description:
-      "Full-stack file management platform with Spring Boot and React. Integrated GCP Cloud Storage and Firebase Realtime DB for per-user metadata. Achieved sub-500ms upload latency for 10MB files under 50 concurrent users. Secured with Firebase ID-token auth and stateless Spring Security.",
-    tags: ["Java", "Spring Boot", "React", "Firebase", "GCP"],
-    github: "https://github.com/Zyrexam/CloudVault.git",
-    live: null,
-    type: "github" as const,
-  },
-  {
-    id: 6,
-    title: "Secure Contract Pipeline",
-    description:
-      "Automated pipeline for Solidity smart contract generation, vulnerability analysis, and LLM-based patching. Combines static analysis tooling with domain-specific prompting to detect and repair contract vulnerabilities end-to-end.",
-    tags: ["Solidity", "Python", "Static Analysis", "LLM"],
-    github: "https://github.com/Zyrexam/Smart-Contract-Pipeline-1.git",
-    live: null,
-    type: "github" as const,
-  },
-  {
-    id: 7,
-    title: "FedMeet",
-    description:
-      "Federated learning framework for human activity recognition using multi-sensor IMU data (smartwatch + earables). Implemented gated sensor fusion and BiLSTM to handle non-IID distributions. Achieved 87.97% accuracy — outperforming FedProx, FedPer, and ClusterFL. Co-authored ACM publication.",
-    tags: ["Python", "Flower", "BiLSTM", "Federated Learning"],
-    github: "https://github.com/Zyrexam/SensorFlow-Model.git",
-    live: "https://dl.acm.org/doi/10.1145/3772290.3772295",
-    type: "research" as const,
-  },
-];
+"use client";
 
-const typeBadge = {
-  live:     { label: "Live", className: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" },
-  github:   { label: "GitHub", className: "bg-white/5 text-muted-foreground border border-white/10" },
-  research: { label: "Research · ACM", className: "bg-amber-500/10 text-amber-400 border border-amber-500/20" },
-};
+import { projects } from "@/lib/data";
+import { useReveal } from "@/hooks/use-reveal";
 
 const GitHubIcon = () => (
   <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
@@ -83,82 +9,228 @@ const GitHubIcon = () => (
   </svg>
 );
 
-export default function Projects() {
+function typeBadge(type: string) {
+  if (type === "live")
+    return (
+      <span className="type-badge accent">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <line x1="2" y1="12" x2="22" y2="12" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
+        Live
+      </span>
+    );
+  if (type === "research")
+    return (
+      <span className="type-badge accent">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M10 2v7.31" />
+          <path d="M14 9.3V2" />
+          <path d="M8.5 2h7" />
+          <path d="M14 9.3a6.5 6.5 0 1 1-4 0" />
+          <path d="M5.52 16h12.96" />
+        </svg>
+        Research
+      </span>
+    );
   return (
-    <section id="projects" className="mt-24 max-w-4xl pt-12 sm:mt-28 sm:pt-16">
-      <div className="section-label mb-8 sm:mb-10">Projects</div>
-      <div className="border-t border-white/8">
-        {projects.map((project, index) => {
-          const badge = typeBadge[project.type];
-          return (
-            <div
-              key={project.id}
-              className="group grid gap-4 border-b border-white/8 py-6 sm:gap-6 sm:py-8 md:grid-cols-[1fr_auto]"
-            >
-              <div>
-                {/* Number + badge */}
-                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <span className={`font-mono text-[9px] uppercase tracking-[0.14em] px-2 py-0.5 rounded-sm ${badge.className}`}>
-                    {badge.label}
-                  </span>
-                </div>
+    <span className="type-badge">
+      <GitHubIcon />
+      Source
+    </span>
+  );
+}
 
-                <h3 className="mt-3 font-serif text-[1.65rem] leading-none text-foreground sm:text-[2rem]">
-                  {project.title}
-                </h3>
+function projectLinks(p: (typeof projects)[number]) {
+  return (
+    <div className="proj-links">
+      <a
+        className="arrow-link"
+        href={p.github}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub
+        <svg
+          className="arrow"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="7" y1="17" x2="17" y2="7" />
+          <polyline points="7 7 17 7 17 17" />
+        </svg>
+      </a>
+      {p.live && p.type === "live" && (
+        <a
+          className="arrow-link"
+          href={p.live}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Live site
+          <svg
+            className="arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
+        </a>
+      )}
+      {p.publication && (
+        <a
+          className="arrow-link"
+          href={p.publication}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-4 w-4"
+            aria-hidden="true"
+          >
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+          </svg>
+          ACM publication
+          <svg
+            className="arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
+        </a>
+      )}
+    </div>
+  );
+}
 
-                <p className="mt-4 max-w-2xl text-[0.92rem] leading-[1.75] text-muted-foreground sm:text-[0.95rem] sm:leading-[1.8]">
-                  {project.description}
-                </p>
+function tagList(tags: string[]) {
+  return (
+    <div className="proj-tags">
+      {tags.map((t) => (
+        <span key={t} className="proj-tag">
+          {t}
+        </span>
+      ))}
+    </div>
+  );
+}
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="mono-chip">{tag}</span>
-                  ))}
-                </div>
+function RevealBox({ children, delay }: { children: React.ReactNode; delay?: string }) {
+  const { ref, isIn } = useReveal();
+  return (
+    <div
+      ref={ref}
+      className={`reveal${isIn ? " is-in" : ""}`}
+      style={delay ? { transitionDelay: delay } : undefined}
+    >
+      {children}
+    </div>
+  );
+}
 
-                {/* Links row */}
-                <div className="mt-5 flex flex-wrap items-center gap-3">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground transition-colors duration-150 hover:text-foreground"
-                    >
-                      <GitHubIcon />
-                      Source
-                    </a>
-                  )}
-                  {project.github && project.live && (
-                    <span className="text-white/10">|</span>
-                  )}
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-emerald-400 transition-opacity duration-150 hover:opacity-70"
-                    >
-                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      Live demo
-                    </a>
-                  )}
-                </div>
+export default function Projects() {
+  const { ref: headRef, isIn: headIn } = useReveal();
+  const featured = projects.find((p) => p.featured) || projects[0];
+  const rest = projects.filter((p) => p !== featured);
+
+  return (
+    <section id="projects">
+      <div className="container">
+        <div
+          ref={headRef}
+          className={`section-head${headIn ? " is-in" : ""} reveal`}
+        >
+          <span className="idx">06</span>
+          <span className="lbl">Selected work</span>
+          <span className="end">Projects</span>
+        </div>
+
+        <div className="projects-stack">
+          {/* Featured card */}
+          <RevealBox>
+            <article className="proj-card featured">
+              <div className="proj-top">
+                {typeBadge(featured.type)}
+                <span className="proj-num">
+                  01 / {String(projects.length).padStart(2, "0")}
+                </span>
               </div>
-
-              {/* Arrow */}
-              <div className="hidden items-start pt-10 text-muted-foreground md:flex">
-                ↗
+              <h3 className="proj-title">{featured.title}</h3>
+              <div className="proj-featured-body">
+                <div className="proj-featured-left">
+                  {tagList(featured.tags)}
+                  {projectLinks(featured)}
+                </div>
+                <p className="proj-featured-desc">{featured.description}</p>
               </div>
-            </div>
-          );
-        })}
+            </article>
+          </RevealBox>
+
+          {/* Grid of rest */}
+          <div className="projects-grid">
+            {rest.map((p, i) => (
+              <RevealBox key={p.id} delay={`${(i % 2) * 0.08}s`}>
+                <article className="proj-card compact">
+                  <div className="proj-top">
+                    {typeBadge(p.type)}
+                    <span className="proj-num">
+                      {String(i + 2).padStart(2, "0")} /{" "}
+                      {String(projects.length).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="proj-title" style={{ marginTop: "1.25rem" }}>
+                    {p.title}
+                  </h3>
+                  {tagList(p.tags)}
+                  <p className="proj-desc">{p.description}</p>
+                  <div className="proj-footer">{projectLinks(p)}</div>
+                </article>
+              </RevealBox>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

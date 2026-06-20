@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { DM_Mono, DM_Serif_Display, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const dmSerif = DM_Serif_Display({
+const inter = Inter({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-serif",
+  variable: "--font-sans",
+  display: "swap",
 });
-const dmMono = DM_Mono({
+
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
+  variable: "--font-serif",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -31,9 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} ${dmSerif.variable} ${dmMono.variable} bg-background text-foreground`}
-      >
+      <body className={`${inter.variable} ${fraunces.variable}`}>
         {children}
         <Analytics />
       </body>

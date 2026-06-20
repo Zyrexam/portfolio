@@ -2,6 +2,7 @@
 
 import Navigation from "@/components/navigation";
 import Hero from "@/components/sections/hero";
+import Stats from "@/components/sections/stats";
 import About from "@/components/sections/about";
 import Skills from "@/components/sections/skills";
 import Experience from "@/components/sections/experience";
@@ -11,19 +12,21 @@ import Footer from "@/components/footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <>
+      <div className="grain" aria-hidden="true" />
       <Navigation />
-      <main className="relative z-10 px-6 pb-24 pt-10 sm:px-8">
-        <div className="mx-auto flex max-w-4xl flex-col">
+      <div className="page">
+        <main>
           <Hero />
+          <Stats />
           <About />
           <Skills />
           <Experience />
           <Projects />
           <Contact />
-        </div>
-      </main>
-      <Footer />
-    </div>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
