@@ -38,27 +38,6 @@ export const hero = {
   ] as CTAButton[],
 } as const;
 
-export const stats = [
-  {
-    id: "01",
-    value: "91.19%",
-    label: "ML accuracy",
-    note: "IMU engagement model · XGBoost + ONNX cross-validation",
-  },
-  {
-    id: "02",
-    value: "95.9%",
-    label: "cache hit rate",
-    note: "Redis cache · 24h TTL · payment idempotency proxy",
-  },
-  {
-    id: "03",
-    value: "0",
-    label: "duplicate charges across 20 concurrent requests",
-    note: "Redis SET NX + Lua atomic release · zero race-condition doubles",
-  },
-] as const;
-
 export const about = {
   tagline:
     "Backend engineer who builds systems that are simple, reliable, and fast.",

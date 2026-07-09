@@ -27,7 +27,7 @@ export default function Hero() {
     { label: "Location", value: "India" },
     { label: "Email", value: "mohitkumar4922251@gmail.com" },
     { label: "GitHub", value: "github.com/Zyrexam" },
-    { label: "LeetCode", value: `mohitkumar4 · ${leetCount ?? 300}+` },
+    { label: "LeetCode", value: `mohitkumar4 · ${leetCount ?? 240}+` },
   ];
 
   return (

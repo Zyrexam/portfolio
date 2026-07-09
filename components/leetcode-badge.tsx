@@ -28,5 +28,5 @@ export default function LeetCodeBadge({ className }: Props) {
     };
   }, []);
 
-  return <span className={className}>{count ?? 300}+</span>;
+  return <span className={className}>{count ?? 240}+</span>;
 }
