@@ -18,15 +18,15 @@ function StatCard({
   return (
     <div
       ref={ref}
-      className={`stat-card${isIn ? " is-in" : ""}`}
+      className={`stat-card nb-card${isIn ? " is-in" : ""}`}
       style={{ transitionDelay: delay, opacity: isIn ? undefined : 0 }}
     >
       <div className="stat-top">
-        <span className="eyebrow">{stat.id}</span>
-        <span className="stat-dot" />
+        <span className="eyebrow text-black/50">{stat.id}</span>
+        <span className="size-2 rounded-none bg-[var(--nb-black)]" />
       </div>
       <div>
-        <div className="stat-value">{stat.value}</div>
+        <div className="stat-value font-serif font-extrabold text-black">{stat.value}</div>
         <div className={labelClass}>{stat.label}</div>
         <div className="stat-note">{stat.note}</div>
       </div>

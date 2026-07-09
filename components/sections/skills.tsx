@@ -30,6 +30,7 @@ import {
 import { FaAws, FaJava } from "react-icons/fa";
 import { VscVscode } from "react-icons/vsc";
 import { useReveal } from "@/hooks/use-reveal";
+import SectionTag from "@/components/section-tag";
 import { skillGroups } from "@/lib/data";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -76,7 +77,7 @@ function SkillTag({
       {Icon ? (
         <Icon />
       ) : (
-        <span className="mono">{name.slice(0, 2).toUpperCase()}</span>
+        <span className="mono font-serif italic text-xs">{name.slice(0, 2).toUpperCase()}</span>
       )}
       {name}
     </li>
@@ -96,28 +97,13 @@ function SkillCard({ group, index }: { group: (typeof skillGroups)[number]; inde
       }}
     >
       <div className="skill-head">
-        <h3>{group.title}</h3>
+        <div>
+          <h3>{group.title}</h3>
+          <span className="skill-head-underline" />
+        </div>
         {group.learning ? (
-          <span className="skill-badge">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-              <path d="M6 12v5c3 3 9 3 12 0v-5" />
-            </svg>
-            learning
-          </span>
-        ) : (
-          <span className="skill-count">
-            {String(group.items.length).padStart(2, "0")}
-          </span>
-        )}
+          <span className="skill-learning-tag">Learning</span>
+        ) : null}
       </div>
       <ul className="skill-tags">
         {group.items.map((item) => (
@@ -133,18 +119,12 @@ function SkillCard({ group, index }: { group: (typeof skillGroups)[number]; inde
 }
 
 export default function Skills() {
-  const { ref: headRef, isIn: headIn } = useReveal();
 
   return (
     <section id="skills">
       <div className="container">
-        <div
-          ref={headRef}
-          className={`section-head${headIn ? " is-in" : ""} reveal`}
-        >
-          <span className="idx">04</span>
-          <span className="lbl">Skills</span>
-          <span className="end">Stack &amp; tooling</span>
+        <div className="mb-4">
+          <SectionTag label="WHAT I WORK WITH" />
         </div>
 
         <div className="skills-grid">

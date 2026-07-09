@@ -1,10 +1,10 @@
 "use client";
 
 import { about } from "@/lib/data";
+import SectionTag from "@/components/section-tag";
 import { useReveal } from "@/hooks/use-reveal";
 
 export default function About() {
-  const { ref: headRef, isIn: headIn } = useReveal();
   const { ref: taglineRef, isIn: taglineIn } = useReveal();
   const { ref: bodyRef, isIn: bodyIn } = useReveal();
   const { ref: p1Ref, isIn: p1In } = useReveal();
@@ -12,18 +12,16 @@ export default function About() {
   const { ref: curRef, isIn: curIn } = useReveal();
 
   return (
-    <section id="about">
+    <section id="about" className="relative">
       <div className="container">
-        <div ref={headRef} className={`section-head${headIn ? " is-in" : ""} reveal`}>
-          <span className="idx">03</span>
-          <span className="lbl">About</span>
-          <span className="end">Profile</span>
+        <div className="mb-4">
+          <SectionTag label="ABOUT ME" />
         </div>
 
         <div className="about-grid">
           <h2
             ref={taglineRef}
-            className={`about-tagline${taglineIn ? " is-in" : ""}`}
+            className={`about-tagline font-serif font-bold text-black${taglineIn ? " is-in" : ""}`}
             style={{ opacity: taglineIn ? undefined : 0 }}
           >
             {about.tagline}
@@ -36,6 +34,7 @@ export default function About() {
           >
             <p
               ref={p1Ref}
+              className="about-p1"
               style={{
                 opacity: p1In ? undefined : 0,
                 transform: p1In ? undefined : "translateY(18px)",
@@ -47,6 +46,7 @@ export default function About() {
             </p>
             <p
               ref={p2Ref}
+              className="about-p2"
               style={{
                 opacity: p2In ? undefined : 0,
                 transform: p2In ? undefined : "translateY(18px)",

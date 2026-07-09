@@ -6,24 +6,24 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="footer">
+    <footer className="bg-white text-black border-t-[3px] border-solid border-black">
       <div className="container">
-        <div className="footer-inner">
+        <div className="footer-inner font-serif font-bold uppercase">
           <div className="footer-id">
-            <span className="mark">M</span>
+            <span className="mark border-[3px] border-black rounded-none">M</span>
             <div>
               <div className="name">
-                {personal.name}<span className="dim"> — Backend Engineer</span>
+                {personal.name}<span className="text-black/50"> — Backend Engineer</span>
               </div>
-              <div className="sub">Built with care · IIT Jodhpur</div>
+              <div className="sub text-black/50">Built with care · IIT Jodhpur</div>
             </div>
           </div>
           <div className="footer-right">
-            <span className="footer-year">IIT Jodhpur · {year}</span>
-            <a className="btn-top arrow-link" href="#top">
+            <span className="text-sm text-black/50">{year}</span>
+            <a className="inline-flex items-center gap-2 border-[3px] border-black rounded-none px-4 py-2 text-sm font-bold uppercase hover:bg-black hover:text-white transition-colors" href="#top">
               Back to top
               <svg
-                className="arrow"
+                className="size-4"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

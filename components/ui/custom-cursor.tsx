@@ -83,7 +83,7 @@ export default function CustomCursor() {
           height: 24px !important;
           margin-left: -2px !important;
           margin-top: -12px !important;
-          border-radius: 2px !important;
+          border-radius: 0 !important;
           background-color: rgba(34, 211, 238, 0.9);
           border: none !important;
         }

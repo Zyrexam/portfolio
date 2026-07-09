@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { contactData, social } from "@/lib/data";
 import { useReveal } from "@/hooks/use-reveal";
+import SectionTag from "@/components/section-tag";
 import LeetCodeBadge from "@/components/leetcode-badge";
 
 const toastClasses = "toast";
 
 export default function Contact() {
-  const { ref: headRef, isIn: headIn } = useReveal();
   const { ref: leftRef, isIn: leftIn } = useReveal();
   const { ref: formRef, isIn: formIn } = useReveal();
 
@@ -69,13 +69,8 @@ export default function Contact() {
   return (
     <section id="contact">
       <div className="container">
-        <div
-          ref={headRef}
-          className={`section-head${headIn ? " is-in" : ""} reveal`}
-        >
-          <span className="idx">07</span>
-          <span className="lbl">Contact</span>
-          <span className="end">Get in touch</span>
+        <div className="mb-4">
+          <SectionTag label="GET IN TOUCH" />
         </div>
 
         <div className="contact-grid">
@@ -200,13 +195,13 @@ export default function Contact() {
                   id="cf-message"
                   name="message"
                   placeholder="Tell me about the role or project…"
-                  rows={5}
+                  rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
                 />
               </div>
-              <button className="btn-submit" type="submit" disabled={submitting}>
+              <button className="inline-flex items-center justify-center gap-2 px-7 py-3 font-bold uppercase text-sm tracking-wider border-[3px] border-solid border-black rounded-none bg-[#00D9FF] text-black shadow-[4px_4px_0_black] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_black] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0_black]" type="submit" disabled={submitting}>
                 {submitting ? (
                   <>
                     <span className="spinner" /> Sending…
@@ -222,6 +217,7 @@ export default function Contact() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       aria-hidden="true"
+                      className="size-4"
                     >
                       <line x1="22" y1="2" x2="11" y2="13" />
                       <polygon points="22 2 15 22 11 13 2 9 22 2" />

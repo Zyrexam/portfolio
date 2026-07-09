@@ -2,6 +2,7 @@
 
 import { experiences } from "@/lib/data";
 import { useReveal } from "@/hooks/use-reveal";
+import SectionTag from "@/components/section-tag";
 
 function ExperienceItem({
   exp,
@@ -22,40 +23,34 @@ function ExperienceItem({
       }}
     >
       <span className="exp-dot" aria-hidden="true" />
-      <div className="exp-meta">
-        <span className="eyebrow exp-period">{exp.period}</span>
-        <div className="exp-org">{exp.company}</div>
-      </div>
-      <div className="exp-body">
+      <div className="exp-head">
         <h3 className="exp-role">{exp.position}</h3>
-        <ul className="exp-bullets">
-          {exp.description.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
+        <span className="exp-role-underline" />
+        <div className="exp-sub">
+          <span className="exp-company">{exp.company}</span>
+          <span className="exp-period"> · {exp.period}</span>
+        </div>
       </div>
+      <ul className="exp-bullets">
+        {exp.description.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 export default function Experience() {
-  const { ref: headRef, isIn: headIn } = useReveal();
 
   return (
     <section id="experience">
       <div className="container">
-        <div
-          ref={headRef}
-          className={`section-head${headIn ? " is-in" : ""} reveal`}
-        >
-          <span className="idx">05</span>
-          <span className="lbl">Experience</span>
-          <span className="end">Selected roles</span>
+        <div className="mb-4">
+          <SectionTag label="EXPERIENCE" />
         </div>
 
         <div className="exp-list">
           <span className="exp-spine" aria-hidden="true" />
-
           {experiences.map((exp, i) => (
             <ExperienceItem
               key={exp.position}
