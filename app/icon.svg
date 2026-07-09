@@ -1,14 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="14" fill="#17130f"/>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="#ede6d8" stroke-opacity="0.16" stroke-width="1.5"/>
-  <text
-    x="50%"
-    y="54%"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-style="italic"
-    font-size="34"
-    fill="#e0653f"
-  >M</text>
+  <!-- Solid black background -->
+  <rect width="64" height="64" fill="#000000"/>
+
+  <!-- Offset shadow in cyan (neubrutalist effect) -->
+  <path d="M 15 46 L 15 16 L 35 30 L 55 16 L 55 46"
+        stroke="#00D9FF"
+        stroke-width="8"
+        stroke-linecap="square"
+        fill="none"/>
+
+  <!-- Bold "M" in cream -->
+  <path d="M 12 43 L 12 13 L 32 27 L 52 13 L 52 43"
+        stroke="#FAF7F0"
+        stroke-width="8"
+        stroke-linecap="square"
+        fill="none"/>
 </svg>
