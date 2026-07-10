@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import CursorFollower from "@/components/cursor-follower";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,7 +33,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
-        <CursorFollower />
         <div
           className="fixed inset-0 pointer-events-none"
           style={{
