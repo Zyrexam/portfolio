@@ -23,6 +23,17 @@ const wordVariants = {
   }),
 };
 
+const gridCells = [
+  { left: 80, top: 120, opacity: 0.04 },
+  { left: 360, top: 40, opacity: 0.06 },
+  { left: 600, top: 200, opacity: 0.045 },
+  { left: 160, top: 320, opacity: 0.055 },
+  { left: 440, top: 280, opacity: 0.05 },
+  { left: 720, top: 80, opacity: 0.04 },
+  { left: 280, top: 200, opacity: 0.06 },
+  { left: 520, top: 360, opacity: 0.05 },
+];
+
 export default function Hero() {
   const [leetCount, setLeetCount] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -33,7 +44,6 @@ export default function Hero() {
   });
   const subtitleY = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const specY = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.2]);
 
   useEffect(() => {
@@ -55,7 +65,7 @@ export default function Hero() {
     { label: "Location", value: "India" },
     { label: "Email", value: "mohitkumar4922251@gmail.com" },
     { label: "GitHub", value: "github.com/Zyrexam" },
-    { label: "LeetCode", value: `mohitkumar4 · ${leetCount ?? 240}+` },
+    { label: "LeetCode", value: `mohitkumar4 · ${leetCount ?? 300}+` },
   ];
 
   const nameWords = [
@@ -67,16 +77,40 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="bg-brutal-white text-brutal-fg relative"
+      className="bg-brutal-white text-brutal-fg relative overflow-hidden"
     >
-      {/* Parallax background accent */}
-      <motion.div
-        className="absolute top-20 right-0 w-[400px] h-[400px] bg-[#00D9FF]/5 pointer-events-none -z-10"
-        style={{ y: bgY }}
+      {/* Subtle grid pattern background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 0,
+          backgroundImage: [
+            "linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)",
+          ].join(", "),
+          backgroundSize: "40px 40px",
+        }}
         aria-hidden="true"
       />
 
-      <motion.div className="container pb-20 md:pb-28" style={{ opacity }}>
+      {/* Accent cells woven into grid */}
+      {gridCells.map((cell, i) => (
+        <div
+          key={i}
+          className="absolute pointer-events-none"
+          style={{
+            zIndex: 0,
+            left: cell.left,
+            top: cell.top,
+            width: 40,
+            height: 40,
+            background: `rgba(0,217,255,${cell.opacity})`,
+          }}
+          aria-hidden="true"
+        />
+      ))}
+
+      <motion.div className="container pb-20 md:pb-28 relative" style={{ opacity, zIndex: 1 }}>
         {/* Pulse dot + label rail - staggered entrance */}
         <motion.div
           className="flex items-center gap-3 mb-10"
@@ -200,7 +234,7 @@ export default function Hero() {
                       )}
                       {btn.label}
                       {btn.label === "LeetCode" ? (
-                        <span className="ml-1 text-xs font-bold">{leetCount ?? 240}+</span>
+                        <span className="ml-1 text-xs font-bold">{leetCount ?? 300}+</span>
                       ) : btn.badge ? (
                         <span className="ml-1 text-xs font-bold">{btn.badge}</span>
                       ) : null}

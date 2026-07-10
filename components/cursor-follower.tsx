@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
-const CURSOR_SIZE = 12;
-const TRAIL_SIZE = 48;
+const CURSOR_SIZE = 9;
+const TRAIL_SIZE = 36;
 
 export default function CursorFollower() {
   const [visible, setVisible] = useState(false);
