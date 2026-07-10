@@ -29,8 +29,9 @@ import {
 } from "react-icons/si";
 import { FaAws, FaJava } from "react-icons/fa";
 import { VscVscode } from "react-icons/vsc";
-import { useReveal } from "@/hooks/use-reveal";
+import { motion } from "framer-motion";
 import SectionTag from "@/components/section-tag";
+import TiltCard from "@/components/tilt-card";
 import { skillGroups } from "@/lib/data";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -64,13 +65,19 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   SiOllama,
 };
 
-function SkillTag({
-  name,
-  iconName,
-}: {
-  name: string;
-  iconName: string | null;
-}) {
+const overshoot: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.45, ease: overshoot, delay: i * 0.08 },
+  }),
+};
+
+function SkillTag({ name, iconName }: { name: string; iconName: string | null }) {
   const Icon = iconName ? iconMap[iconName] : null;
   return (
     <li className="skill-tag">
@@ -85,47 +92,47 @@ function SkillTag({
 }
 
 function SkillCard({ group, index }: { group: (typeof skillGroups)[number]; index: number }) {
-  const { ref, isIn } = useReveal();
-
   return (
-    <div
-      ref={ref}
-      className={`skill-card${isIn ? " is-in" : ""}`}
-      style={{
-        opacity: isIn ? undefined : 0,
-        transitionDelay: `${index * 0.08}s`,
-      }}
+    <motion.div
+      variants={cardVariants}
+      custom={index}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px 0px" }}
     >
-      <div className="skill-head">
-        <div>
-          <h3>{group.title}</h3>
-          <span className="skill-head-underline" />
+      <TiltCard className="skill-card">
+        <div className="skill-head">
+          <div>
+            <h3>{group.title}</h3>
+            <span className="skill-head-underline" />
+          </div>
+          {group.learning ? (
+            <span className="skill-learning-tag">Learning</span>
+          ) : null}
         </div>
-        {group.learning ? (
-          <span className="skill-learning-tag">Learning</span>
-        ) : null}
-      </div>
-      <ul className="skill-tags">
-        {group.items.map((item) => (
-          <SkillTag
-            key={item.name}
-            name={item.name}
-            iconName={item.icon}
-          />
-        ))}
-      </ul>
-    </div>
+        <ul className="skill-tags">
+          {group.items.map((item) => (
+            <SkillTag key={item.name} name={item.name} iconName={item.icon} />
+          ))}
+        </ul>
+      </TiltCard>
+    </motion.div>
   );
 }
 
 export default function Skills() {
-
   return (
     <section id="skills">
       <div className="container">
-        <div className="mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px 0px" }}
+          transition={{ duration: 0.4, ease: overshoot }}
+          className="mb-4"
+        >
           <SectionTag label="WHAT I WORK WITH" />
-        </div>
+        </motion.div>
 
         <div className="skills-grid">
           {skillGroups.map((group, i) => (
