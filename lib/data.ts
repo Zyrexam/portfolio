@@ -74,6 +74,7 @@ export const skillGroups: {
       { name: "TypeScript", icon: "SiTypescript" },
       { name: "SQL", icon: null },
       { name: "Solidity", icon: "SiSolidity" },
+      { name: "Go", icon: "SiGo" },
     ],
   },
   {
@@ -89,7 +90,8 @@ export const skillGroups: {
       { name: "Firebase", icon: "SiFirebase" },
       { name: "AWS (S3, EC2)", icon: "FaAws" },
       { name: "GCP", icon: "SiGooglecloud" },
-      { name: "REST APIs", icon: null }
+      { name: "REST APIs", icon: null },
+      { name: "gRPC", icon: null }
     ],
   },
   {
