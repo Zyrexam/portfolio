@@ -129,6 +129,8 @@ export type Project = {
   featured?: boolean;
   tags: string[];
   description: string;
+  shortDescription: string;
+  outcome: string;
   github: string;
   live: string | null;
   publication?: string;
@@ -143,6 +145,10 @@ export const projects: Project[] = [
     tags: ["FastAPI", "PostgreSQL", "Redis", "Python"],
     description:
       "Async webhook delivery engine (FastAPI + PostgreSQL + Redis) returning 202 Accepted on ingest. Models lifecycle as PENDING → IN FLIGHT → DELIVERED → DEAD with a watchdog rescuing stale jobs every 30s via updated-at threshold. Exponential backoff retry scheduler (2s → 32s, max 5 attempts) using Redis sorted set as delay queue. Circuit breaker (CLOSED → OPEN → HALF-OPEN) halting delivery after 5 failures with 60s recovery cooldown. Secures payloads with per-subscription HMAC-SHA256 signatures.",
+    shortDescription:
+      "Async webhook delivery engine with lifecycle tracking and fault-tolerant retry scheduling.",
+    outcome:
+      "202 Accepted on ingest · exponential backoff 2s→32s · circuit breaker with 60s cooldown",
     github: "https://github.com/Zyrexam/Webhook-Delivery-System",
     live: null,
   },
@@ -160,28 +166,40 @@ export const projects: Project[] = [
     ],
     description:
       "Stateless payment proxy (FastAPI + Redis + PostgreSQL + Prometheus + Grafana) containerized with Docker Compose — one command deploys all 5 services. Distributed locks via Redis SET NX + Lua atomic release preventing race conditions on concurrent requests; validated 20 simultaneous requests producing exactly 1 transaction with zero duplicate charges. PostgreSQL audit trail (amounts in cents) with Pydantic validation and SHA-256 tamper detection. Redis caching (24h TTL, 95.9% hit rate) with Prometheus metrics exported to Grafana.",
+    shortDescription:
+      "Stateless payment proxy preventing duplicate charges with distributed locks and Redis caching.",
+    outcome:
+      "20 concurrent requests → 1 transaction · 95.9% cache hit rate · SHA-256 tamper detection",
     github: "https://github.com/Zyrexam/payment-idempotency-proxy",
     live: null,
   },
   {
     id: 3,
-    title: "Spring Email Scheduler",
-    type: "github",
-    tags: ["Java", "Spring Boot", "Quartz", "MySQL"],
-    description:
-      "Fault-tolerant job scheduling system using Spring Boot and Quartz with MySQL-backed persistence. Supports 50+ concurrent timezone-aware tasks with sub-second execution delays, automatic job recovery, and retry mechanisms.",
-    github: "https://github.com/Zyrexam/Spring-EmailScheduler.git",
-    live: null,
-  },
-  {
-    id: 4,
     title: "Well-Log-Analyzer",
     type: "live",
     tags: ["React", "FastAPI", "Python", "PostgreSQL", "AWS S3", "Groq"],
     description:
       "Full-stack sensor data platform processing 50,000+ rows across 100+ channels. Reduced frontend rendering latency by 90% via Intelligent Windowed Downsampling and hit 10,000+ rows/sec backend throughput with async pipelines. Ships a Groq-powered GeoBot (Llama 3.3-70B) with streaming responses and persistent chat history.",
+    shortDescription:
+      "Full-stack sensor data platform processing 50,000+ rows across 100+ channels.",
+    outcome:
+      "90% frontend latency reduction · 10,000+ rows/sec throughput · Groq-powered GeoBot",
     github: "https://github.com/Zyrexam/Well-Log-Analyzer",
     live: "https://well-log-analyzer.vercel.app/",
+  },
+  {
+    id: 4,
+    title: "TurboTTS-Proxy",
+    type: "github",
+    tags: ["Go", "gRPC", "Redis", "Kubernetes", "Docker", "HTTP/2"],
+    description:
+      "High-throughput gRPC proxy in Go minimizing Time-To-First-Audio-Byte (TTFA) for real-time AI voice agents via intelligent TTS audio chunk caching in Redis. Chunked binary streaming over HTTP/2 reduces cold TTFA from 320ms to <2ms on cache hits using SHA-256 key hashing and asynchronous cache population. Containerized and orchestrated via Kubernetes with ConfigMaps, Secrets, and multi-stage Docker builds.",
+    shortDescription:
+      "High-throughput gRPC proxy reducing TTFA for real-time AI voice agents via Redis caching.",
+    outcome:
+      "320ms→<2ms cold TTFA · SHA-256 key hashing · Kubernetes orchestrated",
+    github: "https://github.com/Zyrexam/TTS-Proxy",
+    live: null,
   },
   {
     id: 5,
@@ -190,31 +208,58 @@ export const projects: Project[] = [
     tags: ["Java", "Spring Boot", "React", "Firebase", "GCP"],
     description:
       "Full-stack file management platform with Spring Boot and React. Integrated GCP Cloud Storage and Firebase Realtime DB for per-user metadata. Achieved sub-500ms upload latency for 10MB files under 50 concurrent users. Secured with Firebase ID-token auth and stateless Spring Security.",
+    shortDescription:
+      "File management platform achieving sub-500ms upload latency under 50 concurrent users.",
+    outcome:
+      "Sub-500ms upload latency · GCP Cloud Storage + Firebase · stateless Spring Security",
     github: "https://github.com/Zyrexam/CloudVault.git",
     live: null,
   },
   {
     id: 6,
+    title: "Spring Email Scheduler",
+    type: "github",
+    tags: ["Java", "Spring Boot", "Quartz", "MySQL"],
+    description:
+      "Fault-tolerant job scheduling system using Spring Boot and Quartz with MySQL-backed persistence. Supports 50+ concurrent timezone-aware tasks with sub-second execution delays, automatic job recovery, and retry mechanisms.",
+    shortDescription:
+      "Fault-tolerant job scheduling system supporting 50+ concurrent timezone-aware tasks.",
+    outcome:
+      "Sub-second execution delays · automatic job recovery · MySQL-backed Quartz persistence",
+    github: "https://github.com/Zyrexam/Spring-EmailScheduler.git",
+    live: null,
+  },
+  {
+    id: 7,
     title: "Secure Contract Pipeline",
     type: "github",
     tags: ["Solidity", "Python", "Static Analysis", "LLM"],
     description:
       "Automated pipeline for Solidity smart contract generation, vulnerability analysis, and LLM-based patching. Combines static analysis tooling with domain-specific prompting to detect and repair contract vulnerabilities end-to-end.",
+    shortDescription:
+      "Automated pipeline for Solidity contract generation, vulnerability analysis, and LLM patching.",
+    outcome:
+      "Slither + Mythril + Semgrep integration · LLM-based patch generation · end-to-end pipeline",
     github: "https://github.com/Zyrexam/Smart-Contract-Pipeline-1.git",
     live: null,
   },
   {
-    id: 7,
+    id: 8,
     title: "FedMeet",
     type: "research",
     tags: ["Python", "Flower", "BiLSTM", "Federated Learning"],
     description:
       "Federated learning framework for human activity recognition using multi-sensor IMU data (smartwatch + earables). Implemented gated sensor fusion and BiLSTM to handle non-IID distributions. Achieved 87.97% accuracy — outperforming FedProx, FedPer, and ClusterFL. Co-authored ACM publication.",
+    shortDescription:
+      "Federated learning framework for activity recognition using multi-sensor IMU data.",
+    outcome:
+      "87.97% accuracy · gated sensor fusion · outperforms FedProx, FedPer, ClusterFL",
     github: "https://github.com/Zyrexam/SensorFlow-Model.git",
     live: "https://dl.acm.org/doi/10.1145/3772290.3772295",
     publication:
       "https://dl.acm.org/doi/10.1145/3772290.3772295",
   },
+
 ];
 
 export const experiences = [
