@@ -1,5 +1,3 @@
-"use client";
-
 import Navigation from "@/components/navigation";
 import Hero from "@/components/sections/hero";
 import About from "@/components/sections/about";
@@ -9,15 +7,20 @@ import Projects from "@/components/sections/projects";
 import Contact from "@/components/sections/contact";
 import Footer from "@/components/footer";
 import SectionDivider from "@/components/section-divider";
+import SmoothScroll from "@/components/smooth-scroll";
+import { getLeetCodeCount } from "@/lib/leetcode";
 
-export default function Home() {
+export default async function Home() {
+  const solved = await getLeetCodeCount();
+
   return (
     <>
+      <SmoothScroll />
       <div className="grain" aria-hidden="true" />
       <Navigation />
       <div className="page">
         <main>
-          <Hero />
+          <Hero solved={solved} />
           <SectionDivider />
           <About />
           <SectionDivider />
@@ -27,7 +30,7 @@ export default function Home() {
           <SectionDivider />
           <Projects />
           <SectionDivider />
-          <Contact />
+          <Contact solved={solved} />
         </main>
         <Footer />
       </div>

@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
-
 const LEETCODE_GRAPHQL = "https://leetcode.com/graphql/";
 const USERNAME = "mohitkumar4";
+
+/** Shown when LeetCode is unreachable. */
+export const LEETCODE_FALLBACK = 240;
 
 const QUERY = `
   query getUserProfile($username: String!) {
@@ -16,7 +17,11 @@ const QUERY = `
   }
 `;
 
-export async function GET() {
+/**
+ * Fetched on the server during prerender, cached via ISR.
+ * Revalidated once every 24h instead of per-visitor.
+ */
+export async function getLeetCodeCount(): Promise<number> {
   try {
     const res = await fetch(LEETCODE_GRAPHQL, {
       method: "POST",
@@ -32,22 +37,15 @@ export async function GET() {
       next: { revalidate: 86400 },
     });
 
-    if (!res.ok) {
-      return NextResponse.json({ totalSolved: 240, isFallback: true });
-    }
+    if (!res.ok) return LEETCODE_FALLBACK;
 
     const json = await res.json();
-
     const stats = json?.data?.matchedUser?.submitStatsGlobal?.acSubmissionNum;
-    if (!Array.isArray(stats)) {
-      return NextResponse.json({ totalSolved: 240, isFallback: true });
-    }
+    if (!Array.isArray(stats)) return LEETCODE_FALLBACK;
 
     const all = stats.find((s: { difficulty: string }) => s.difficulty === "All");
-    const totalSolved = all?.count ?? 240;
-
-    return NextResponse.json({ totalSolved, isFallback: false });
+    return all?.count ?? LEETCODE_FALLBACK;
   } catch {
-    return NextResponse.json({ totalSolved: 240, isFallback: true });
+    return LEETCODE_FALLBACK;
   }
 }

@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -16,6 +16,13 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Mohit Kumar",
@@ -23,6 +30,24 @@ export const metadata: Metadata = {
   },
   description:
     "Portfolio of Mohit Kumar, a backend systems engineer focused on reliability, latency, and distributed systems under real-world constraints.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Mohit Kumar — Portfolio",
+    title: "Mohit Kumar — Backend Engineer",
+    description:
+      "Backend systems engineer focused on reliability, latency, and distributed systems under real-world constraints.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Mohit Kumar — Backend Engineer",
+    description:
+      "Backend systems engineer focused on reliability, latency, and distributed systems under real-world constraints.",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#FAF7F0",
 };
 
 export default function RootLayout({
@@ -32,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
         <div
           className="fixed inset-0 pointer-events-none"
           style={{

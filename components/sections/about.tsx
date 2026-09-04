@@ -3,9 +3,7 @@
 import { motion } from "framer-motion";
 import { about } from "@/lib/data";
 import SectionTag from "@/components/section-tag";
-
-const overshoot: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
-const smoothOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
+import { Reveal, easeOvershoot as overshoot, easeOut as smoothOut } from "@/components/motion";
 
 const staggered = {
   hidden: {},
@@ -37,15 +35,9 @@ export default function About() {
   return (
     <section id="about" className="relative">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px 0px" }}
-          transition={{ duration: 0.4, ease: overshoot }}
-          className="mb-4"
-        >
-          <SectionTag label="ABOUT ME" />
-        </motion.div>
+        <Reveal className="mb-4" y={15}>
+          <SectionTag label="ABOUT ME" num="01" />
+        </Reveal>
 
         <motion.div
           className="about-grid"
@@ -56,7 +48,7 @@ export default function About() {
         >
           <motion.h2
             variants={fadeUp}
-            className="about-tagline font-serif font-bold text-black"
+            className="about-tagline font-serif font-bold text-fg"
           >
             {about.tagline}
           </motion.h2>

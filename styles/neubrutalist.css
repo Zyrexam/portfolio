@@ -1,10 +1,10 @@
 @theme {
-  --color-brutal-bg: #ffffff;
-  --color-brutal-fg: #000000;
+  --color-brutal-bg: #0A0E12;
+  --color-brutal-fg: #E8EDF2;
   --color-brutal-accent: #00D9FF;
   --color-brutal-accent-hover: #00C4E6;
   --color-brutal-accent-light: #80ECFF;
-  --color-brutal-border: #000000;
+  --color-brutal-border: rgba(232, 237, 242, 0.14);
 
   --default-border-width: 3px;
   --default-border-color: #000000;

@@ -46,7 +46,12 @@ const fallbackVariant = {
 
 const toastClasses = "toast";
 
-export default function Contact() {
+type Props = {
+  /** LeetCode solved count, fetched on the server with 24h ISR. */
+  solved: number;
+};
+
+export default function Contact({ solved }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -111,7 +116,7 @@ export default function Contact() {
           transition={{ duration: 0.4, ease: overshoot }}
           className="mb-4"
         >
-          <SectionTag label="GET IN TOUCH" />
+          <SectionTag label="GET IN TOUCH" num="05" />
         </motion.div>
 
         <div className="contact-grid">
@@ -184,7 +189,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
               >
                 LeetCode
-                <LeetCodeBadge className="lc-badge" />
+                <LeetCodeBadge className="lc-badge" count={solved} />
               </motion.a>
             </motion.div>
           </motion.div>
@@ -233,7 +238,7 @@ export default function Contact() {
               <motion.div variants={fieldVariant}>
                 <MagneticWrapper>
                   <button
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3 font-bold uppercase text-sm tracking-wider border-[3px] border-solid border-black rounded-none bg-[#00D9FF] text-black shadow-[4px_4px_0_black] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_black] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0_black]"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3 font-bold uppercase text-sm tracking-wider border border-accent rounded-none bg-accent text-accent-fg shadow-none hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(0,217,255,0.3)] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-none"
                     type="submit"
                     disabled={submitting}
                   >

@@ -1,7 +1,8 @@
-export default function SectionTag({ label }: { label: string }) {
+export default function SectionTag({ label, num }: { label: string; num?: string }) {
   return (
-    <div className="inline-flex items-center gap-2 border-[2px] border-solid border-black rounded-none bg-white px-3 py-1 text-xs font-bold uppercase tracking-wider">
-      <span className="size-2.5 bg-[#00D9FF] shrink-0" aria-hidden="true" />
+    <div className="inline-flex items-center gap-2 border border-hairline rounded-none bg-bg-2 font-mono px-3 py-1 text-xs font-bold uppercase tracking-wider">
+      {num ? <span className="text-fg-dim">{"//"}{num}</span> : null}
+      <span className="size-2.5 bg-accent shrink-0" aria-hidden="true" />
       {label}
     </div>
   );

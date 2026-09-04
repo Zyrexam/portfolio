@@ -108,7 +108,6 @@ export const skillGroups: {
       { name: "Grafana", icon: "SiGrafana" },
       { name: "IntelliJ IDEA", icon: "SiIntellijidea" },
       { name: "Android Studio", icon: "SiAndroidstudio" },
-      { name: "VS Code", icon: "VscVscode" },
       { name: "Ollama", icon: "SiOllama" },
     ],
   },

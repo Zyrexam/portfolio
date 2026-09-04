@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { hero } from "@/lib/data";
 import SpecCard from "@/components/spec-card";
 import MagneticWrapper from "@/components/magnetic-wrapper";
+import { easeOvershoot as overshoot, easeOut as smoothOut } from "@/components/motion";
 import type { SpecRow } from "@/components/spec-card";
-
-const overshoot: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
-const smoothOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const wordVariants = {
   hidden: { y: "120%", rotate: 5 },
@@ -34,8 +32,12 @@ const gridCells = [
   { left: 520, top: 360, opacity: 0.05 },
 ];
 
-export default function Hero() {
-  const [leetCount, setLeetCount] = useState<number | null>(null);
+type Props = {
+  /** LeetCode solved count, fetched on the server with 24h ISR. */
+  solved: number;
+};
+
+export default function Hero({ solved }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -46,26 +48,13 @@ export default function Hero() {
   const specY = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.2]);
 
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/api/leetcode")
-      .then((r) => r.json())
-      .then((data) => {
-        if (!cancelled && data?.totalSolved) {
-          setLeetCount(data.totalSolved);
-        }
-      })
-      .catch(() => {});
-    return () => { cancelled = true; };
-  }, []);
-
   const specRows: SpecRow[] = [
     { label: "Education", value: "IIT Jodhpur" },
     { label: "Class", value: "2026" },
     { label: "Location", value: "India" },
     { label: "Email", value: "mohitkumar4922251@gmail.com" },
     { label: "GitHub", value: "github.com/Zyrexam" },
-    { label: "LeetCode", value: `mohitkumar4 · ${leetCount ?? 300}+` },
+    { label: "LeetCode", value: `mohitkumar4 · ${solved}+` },
   ];
 
   const nameWords = [
@@ -77,7 +66,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="bg-brutal-white text-brutal-fg relative overflow-hidden"
+      className="bg-bg text-fg relative overflow-hidden"
     >
       {/* Subtle grid pattern background */}
       <div
@@ -85,8 +74,8 @@ export default function Hero() {
         style={{
           zIndex: 0,
           backgroundImage: [
-            "linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px)",
-            "linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(232,237,242,0.06) 1px, transparent 1px)",
+            "linear-gradient(to bottom, rgba(232,237,242,0.06) 1px, transparent 1px)",
           ].join(", "),
           backgroundSize: "40px 40px",
         }}
@@ -119,14 +108,14 @@ export default function Hero() {
           transition={{ duration: 0.5, ease: overshoot, delay: 0.1 }}
         >
           <span className="relative size-2 inline-block" aria-hidden="true">
-            <span className="absolute inset-0 bg-[#00D9FF]" />
+            <span className="absolute inset-0 bg-status" />
             <span
-              className="absolute inset-0 bg-[#00D9FF] opacity-60"
+              className="absolute inset-0 bg-status opacity-60"
               style={{ animation: "ping 1.8s cubic-bezier(0,0,0.2,1) infinite" }}
             />
           </span>
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-black/50">
-            {hero.pulsingDotLabel}
+          <span className="text-xs font-mono uppercase tracking-[0.2em] text-fg-muted">
+            {`operational — ${solved} solved · IIT '26 · India`}
           </span>
         </motion.div>
 
@@ -135,9 +124,9 @@ export default function Hero() {
           {/* LEFT column */}
           <div className="flex-1 min-w-0">
             {/* Bold headline — split word reveal */}
-            <h1 className="font-serif text-6xl sm:text-8xl md:text-9xl font-extrabold uppercase leading-[0.85] tracking-tighter mb-10 overflow-hidden">
+            <h1 className="font-serif text-[clamp(4.5rem,8vw,14rem)] font-extrabold uppercase leading-[0.82] tracking-tighter mb-10 overflow-hidden whitespace-nowrap">
               {nameWords.map((word, wi) => (
-                <span key={word.text} className="block overflow-hidden">
+                <span key={word.text} className="mr-[0.14em] inline-block overflow-hidden last:mr-0">
                   <motion.span
                     className="inline-block"
                     custom={wi}
@@ -155,11 +144,11 @@ export default function Hero() {
             <motion.div className="max-w-3xl mb-12" style={{ y: subtitleY }}>
               <p className="text-lg sm:text-xl md:text-2xl font-bold leading-tight uppercase">
                 Backend engineer — I build{" "}
-                <span className="bg-[#00D9FF] text-black px-1 -mx-1">
+                <span className="bg-accent text-accent-fg px-1 -mx-1">
                   distributed systems
                 </span>
                 , async pipelines, and{" "}
-                <span style={{ backgroundColor: "var(--nb-accent)", color: "black", padding: "2px 6px", fontWeight: 700 }}>
+                <span style={{ backgroundColor: "var(--accent)", color: "var(--accent-fg)", padding: "2px 6px", fontWeight: 700 }}>
                   high-throughput APIs
                 </span>
                 .
@@ -193,18 +182,18 @@ export default function Hero() {
                           ? "noopener noreferrer"
                           : undefined
                       }
-                      style={{ boxShadow: "6px 6px 0 #000000" }}
-                      className={`inline-flex items-center gap-1.5 px-5 py-2.5 font-bold uppercase text-sm tracking-wider border-[3px] border-solid border-black rounded-none ${
+                      style={{ boxShadow: "0 0 0 1px var(--hairline)" }}
+                      className={`inline-flex items-center gap-1.5 px-5 py-2.5 font-bold uppercase text-sm tracking-wider border border-hairline rounded-none ${
                         btn.variant === "primary"
-                          ? "bg-[#00D9FF] text-black hover:bg-[#00C4E6]"
-                          : "bg-white text-black"
+                          ? "bg-accent text-accent-fg hover:bg-[#00C4E6]"
+                          : "bg-bg-2 text-fg"
                       }`}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.boxShadow = "8px 8px 0 #000000";
+                        e.currentTarget.style.boxShadow = "0 0 24px rgba(0,217,255,0.25)";
                         e.currentTarget.style.transform = "translate(-2px, -2px)";
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.boxShadow = "6px 6px 0 #000000";
+                        e.currentTarget.style.boxShadow = "0 0 0 1px var(--hairline)";
                         e.currentTarget.style.transform = "translate(0, 0)";
                       }}
                     >
@@ -234,7 +223,7 @@ export default function Hero() {
                       )}
                       {btn.label}
                       {btn.label === "LeetCode" ? (
-                        <span className="ml-1 text-xs font-bold">{leetCount ?? 300}+</span>
+                        <span className="ml-1 text-xs font-bold">{solved}+</span>
                       ) : btn.badge ? (
                         <span className="ml-1 text-xs font-bold">{btn.badge}</span>
                       ) : null}

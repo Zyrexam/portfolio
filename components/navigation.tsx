@@ -1,196 +1,197 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { social } from "@/lib/data";
-import MagneticWrapper from "@/components/magnetic-wrapper";
 import ScrollProgress from "@/components/scroll-progress";
+import { easeOut, springUI } from "@/components/motion";
+
+const LINKS = [
+  { num: "01", label: "About", href: "#about" },
+  { num: "02", label: "Skills", href: "#skills" },
+  { num: "03", label: "Experience", href: "#experience" },
+  { num: "04", label: "Work", href: "#projects" },
+  { num: "05", label: "Contact", href: "#contact" },
+];
+
+const ResumeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="size-4">
+    <path d="M12 17V3" />
+    <path d="m6 11 6 6 6-6" />
+    <path d="M19 21H5" />
+  </svg>
+);
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
+  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  // Track which section is in view → highlight its nav link
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) setActive(`#${e.target.id}`);
+        }
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    LINKS.forEach(({ href }) => {
+      const el = document.querySelector(href);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
       <ScrollProgress />
-      <header
-        ref={navRef}
-        className="nav bg-white text-black border-b-[3px] border-black py-5"
-      >
+      <header className="nav bg-bg text-fg border-b border-hairline py-5">
         <div className="container nav-inner">
           <a href="#top" className="nav-mono" aria-label="Mohit Kumar — home">
-            <span className="bg-black text-white border-[3px] border-black rounded-none w-9 h-9 flex items-center justify-center text-sm font-bold">
+            <span className="bg-fg text-bg border border-fg rounded-none w-9 h-9 flex items-center justify-center text-sm font-bold">
               M
             </span>
-            <span className="nav-name font-bold">
-              Mohit Kumar
-            </span>
+            <span className="nav-name font-bold">Mohit Kumar</span>
           </a>
 
           <nav className="nav-links" aria-label="Primary">
-            <motion.a
-              href="#about"
-              className="relative font-mono uppercase tracking-wider text-sm text-black/60 hover:text-black after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-black after:w-0 after:transition-all after:duration-200 hover:after:w-full"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-            >
-              About
-            </motion.a>
-            <motion.a
-              href="#skills"
-              className="relative font-mono uppercase tracking-wider text-sm text-black/60 hover:text-black after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-black after:w-0 after:transition-all after:duration-200 hover:after:w-full"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-            >
-              Skills
-            </motion.a>
-            <motion.a
-              href="#experience"
-              className="relative font-mono uppercase tracking-wider text-sm text-black/60 hover:text-black after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-black after:w-0 after:transition-all after:duration-200 hover:after:w-full"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-            >
-              Experience
-            </motion.a>
-            <motion.a
-              href="#projects"
-              className="relative font-mono uppercase tracking-wider text-sm text-black/60 hover:text-black after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-black after:w-0 after:transition-all after:duration-200 hover:after:w-full"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-            >
-              Work
-            </motion.a>
-            <motion.a
-              href="#contact"
-              className="relative font-mono uppercase tracking-wider text-sm text-black/60 hover:text-black after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-black after:w-0 after:transition-all after:duration-200 hover:after:w-full"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-            >
-              Contact
-            </motion.a>
+            {LINKS.map(({ num, label, href }) => {
+              const isActive = active === href;
+              return (
+                <motion.a
+                  key={href}
+                  href={href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`relative font-mono uppercase tracking-wider text-sm transition-colors ${
+                    isActive ? "text-fg" : "text-fg-muted hover:text-fg"
+                  } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-accent after:w-0 after:transition-all after:duration-200 hover:after:w-full ${
+                    isActive ? "after:w-full" : ""
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  transition={springUI}
+                >
+                  <span className="mr-1.5 text-fg-dim">{"//"}{num}</span>
+                  {label}
+                </motion.a>
+              );
+            })}
           </nav>
 
           <div className="nav-actions">
-            <MagneticWrapper>
-              <a
-                className="btn-resume inline-flex items-center gap-2 px-6 py-3 bg-[#00D9FF] text-black font-bold uppercase text-sm tracking-wider border-[3px] border-black rounded-none"
-                href={social.resume}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ boxShadow: "4px 4px 0 #000000" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = "6px 6px 0 #000000";
-                  e.currentTarget.style.transform = "translate(-2px, -2px)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = "4px 4px 0 #000000";
-                  e.currentTarget.style.transform = "translate(0, 0)";
-                }}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className="size-4"
-                >
-                  <path d="M12 17V3" />
-                  <path d="m6 11 6 6 6-6" />
-                  <path d="M19 21H5" />
-                </svg>
-                Resume
-              </a>
-            </MagneticWrapper>
+            <a
+              className="btn-resume inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-fg font-bold uppercase text-sm tracking-wider border border-accent transition-shadow hover:shadow-[0_0_24px_rgba(0,217,255,0.25)]"
+              href={social.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ResumeIcon />
+              Resume
+            </a>
             <button
-              className="nav-toggle border-2 border-black rounded-none text-black"
+              className="nav-toggle border border-hairline rounded-none text-fg"
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((v) => !v)}
             >
-              {menuOpen ? (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              ) : (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <line x1="4" y1="6" x2="20" y2="6" />
-                  <line x1="4" y1="12" x2="20" y2="12" />
-                  <line x1="4" y1="18" x2="20" y2="18" />
-                </svg>
-              )}
+              <AnimatePresence mode="wait" initial={false}>
+                {menuOpen ? (
+                  <motion.svg
+                    key="close"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="size-5"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </motion.svg>
+                ) : (
+                  <motion.svg
+                    key="open"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="size-5"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <line x1="4" y1="6" x2="20" y2="6" />
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                    <line x1="4" y1="18" x2="20" y2="18" />
+                  </motion.svg>
+                )}
+              </AnimatePresence>
             </button>
           </div>
         </div>
       </header>
 
-      <div className={`mobile-menu bg-white text-black${menuOpen ? " open" : ""}`}>
-        <div className="container mobile-menu-inner">
-          <a className="m-link border-b-2 border-black/10 text-black" href="#about" onClick={closeMenu}>
-            About <span className="m-num text-black/50">01</span>
-          </a>
-          <a className="m-link border-b-2 border-black/10 text-black" href="#skills" onClick={closeMenu}>
-            Skills <span className="m-num text-black/50">02</span>
-          </a>
-          <a className="m-link border-b-2 border-black/10 text-black" href="#experience" onClick={closeMenu}>
-            Experience <span className="m-num text-black/50">03</span>
-          </a>
-          <a className="m-link border-b-2 border-black/10 text-black" href="#projects" onClick={closeMenu}>
-            Work <span className="m-num text-black/50">04</span>
-          </a>
-          <a className="m-link border-b-2 border-black/10 text-black" href="#contact" onClick={closeMenu}>
-            Contact <span className="m-num text-black/50">05</span>
-          </a>
-          <a
-            className="m-cta bg-black text-white border-2 border-black rounded-none"
-            href={social.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={closeMenu}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="mobile-menu bg-bg/90 text-fg"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: easeOut }}
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M12 17V3" />
-              <path d="m6 11 6 6 6-6" />
-              <path d="M19 21H5" />
-            </svg>
-            Download Resume
-          </a>
-        </div>
-      </div>
+            <div className="container mobile-menu-inner">
+              {LINKS.map(({ num, label, href }, i) => (
+                <motion.a
+                  key={href}
+                  className="m-link border-b border-hairline text-fg"
+                  href={href}
+                  onClick={closeMenu}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 + i * 0.05, duration: 0.3, ease: easeOut }}
+                >
+                  <span>
+                    <span className="mr-2 font-mono text-xs text-fg-dim">{"//"}{num}</span>
+                    {label}
+                  </span>
+                  <span className="m-num font-mono text-fg-dim">{num}</span>
+                </motion.a>
+              ))}
+              <motion.a
+                className="m-cta bg-accent text-accent-fg border border-accent rounded-none"
+                href={social.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.3, ease: easeOut }}
+              >
+                <ResumeIcon />
+                Download Resume
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

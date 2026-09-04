@@ -3,9 +3,8 @@
 import { motion } from "framer-motion";
 import { projects } from "@/lib/data";
 import SectionTag from "@/components/section-tag";
+import { Reveal, easeOvershoot as overshoot } from "@/components/motion";
 import TiltCard from "@/components/tilt-card";
-
-const overshoot: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
 
 const typeLabels: Record<string, string> = {
   github: "GitHub",
@@ -27,15 +26,9 @@ export default function Projects() {
   return (
     <section id="projects">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px 0px" }}
-          transition={{ duration: 0.4, ease: overshoot }}
-          className="mb-4"
-        >
-          <SectionTag label="SELECTED WORK" />
-        </motion.div>
+        <Reveal className="mb-4" y={15}>
+          <SectionTag label="SELECTED WORK" num="04" />
+        </Reveal>
 
         <div className="projects-grid">
           {projects.map((p, i) => (
@@ -65,7 +58,10 @@ export default function Projects() {
                     <span key={t} className="proj-card-tag">{t}</span>
                   ))}
                 </div>
-                <p className="proj-card-outcome">{p.outcome}</p>
+                <p className="proj-card-outcome">
+                  <span className="proj-outcome-dot" aria-hidden="true" />
+                  {p.outcome}
+                </p>
                 <span className="proj-card-link">View &rarr; {typeLabels[p.type]}</span>
               </TiltCard>
             </motion.div>

@@ -32,6 +32,7 @@ import { FaAws, FaJava } from "react-icons/fa";
 import { VscVscode } from "react-icons/vsc";
 import { motion } from "framer-motion";
 import SectionTag from "@/components/section-tag";
+import { Reveal, easeOvershoot as overshoot } from "@/components/motion";
 import TiltCard from "@/components/tilt-card";
 import { skillGroups } from "@/lib/data";
 
@@ -66,8 +67,6 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   VscVscode,
   SiOllama,
 };
-
-const overshoot: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
 
 const cardVariants = {
   hidden: { opacity: 0, y: 24, scale: 0.96 },
@@ -126,15 +125,9 @@ export default function Skills() {
   return (
     <section id="skills">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px 0px" }}
-          transition={{ duration: 0.4, ease: overshoot }}
-          className="mb-4"
-        >
-          <SectionTag label="WHAT I WORK WITH" />
-        </motion.div>
+        <Reveal className="mb-4" y={15}>
+          <SectionTag label="WHAT I WORK WITH" num="02" />
+        </Reveal>
 
         <div className="skills-grid">
           {skillGroups.map((group, i) => (
