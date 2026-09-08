@@ -1,0 +1,97 @@
+/*
+ * Groq DNA tokens — reverse-engineered from groq.com (see groq-ui-design-report.md).
+ * Converted from Groq's 14px root to a 16px root: every rem ×0.875.
+ * Font families map to next/font variables set in app/layout.tsx.
+ */
+
+:root {
+  /* ---- color: paper & ink ---- */
+  --bg: #f3f3ee;               /* utility-95-yellow — page canvas */
+  --bg-soft: #fafaf8;          /* utility-98-yellow — brightest surface */
+  --bg-tint: #e8e8de;          /* utility-91-yellow — tinted band */
+  --line: #cecebf;             /* utility-81-yellow — hairlines */
+  --ink-faint: #9c9c90;        /* utility-61-yellow */
+  --ink-soft: #69695d;         /* utility-41-yellow — muted labels */
+  --ink-warm: #302b28;         /* homev2-ink — warm ink (marketing) */
+  --ink-cool: #2d2f33;         /* utility-20-blue — cool ink (product/footer) */
+  --ink-dark: #26292e;         /* utility-16-blue — dark sections */
+
+  /* ---- color: brand ---- */
+  --brand: #f43e01;            /* orange base */
+  --brand-deep: #e93b01;       /* orange deep — dots, chips, CTA bands */
+  --brand-dark: #c23101;       /* link hover */
+  --olive: #475c05;            /* olive statement band */
+  --sel-bg: #f4fd90;           /* fluorescent yellow — ::selection */
+  --focus: #f43e01;
+
+  /* ---- color mixes ---- */
+  --ink-80: color-mix(in srgb, var(--ink-warm) 80%, transparent);
+  --bd: 1px solid var(--line);
+
+  /* ---- type families ---- */
+  --ff-display: var(--font-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --ff-mono: var(--font-jbmono), "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+
+  /* ---- fluid type scale (steps 0–9) ---- */
+  --step-0: clamp(0.875rem, 0.830rem + 0.23vw, 1rem);
+  --step-1: clamp(1.05rem, 0.950rem + 0.51vw, 1.331rem);
+  --step-2: clamp(1.26rem, 1.070rem + 0.93vw, 1.775rem);
+  --step-3: clamp(1.51rem, 1.200rem + 1.56vw, 2.369rem);
+  --step-4: clamp(1.81rem, 1.320rem + 2.44vw, 3.156rem);
+  --step-5: clamp(2.18rem, 1.440rem + 3.69vw, 4.206rem);
+  --step-6: clamp(2.61rem, 1.520rem + 5.45vw, 5.613rem);
+  --step-7: clamp(3.14rem, 1.560rem + 7.9vw, 7.481rem);
+  --step-8: clamp(3.76rem, 1.510rem + 11.3vw, 9.975rem);
+  --step-9: clamp(4.513rem, 1.320rem + 14.07vw, 12.25rem);
+
+  /* ---- type roles ---- */
+  --type-display-fs: calc(var(--step-9) * 0.94);  /* hero H1: 184→71px on Groq */
+  --type-lockup-fs: var(--step-8);                /* footer statement */
+  --type-statement-fs: var(--step-6);             /* section statements */
+  --type-card-fs: var(--step-4);                  /* card headings */
+  --type-label-fs: var(--step-0);                 /* nav/labels */
+  --type-micro-fs: 0.625rem;                      /* 10px chips/captions */
+  --type-body-fs: var(--step-0);                  /* mono body */
+
+  /* ---- layout ---- */
+  --page-inset: clamp(1.25rem, 0.645rem + 2.105vw, 2rem);   /* 20→32px */
+  --content-max: 90rem;                                     /* 1440px */
+  --grid-gap: 2rem;                                         /* 32px */
+  --nav-height: 3.75rem;                                    /* 60px */
+  --section-loud: clamp(5rem, 8vh, 8.75rem);                /* 80→140px */
+  --section-standard: clamp(4rem, 6vh, 5rem);               /* 64→80px */
+  --footer-gap: clamp(5rem, 10vh, 10rem);
+
+  /* ---- radius (groq: cards are SHARP, only pills round) ---- */
+  --radius-inner: 5px;
+  --radius-outer: 10px;
+  --radius: 1.25rem;
+  --radius-pill: 1000px;
+
+  /* ---- motion ---- */
+  --trs-time: 0.15s;
+  --trs-fast: 0.2s;
+  --trs-crossfade: 0.25s;
+  --trs-slow: 0.4s;
+  --ease-standard: ease-in-out;
+  --ease-cubic: cubic-bezier(0.4, 0.05, 0.22, 1.2);
+  --ease-expo-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-expo-in: cubic-bezier(1, 0, 0.68, 0.28);
+
+  /* ---- texture sizing ---- */
+  --mosaic-cell: 1.125rem;     /* 18px mobile */
+  --cloud-dot: 5px;
+}
+
+@media (min-width: 37.5em) { /* 600px */
+  :root {
+    --section-loud: clamp(5rem, 8vh, 9.5rem);
+  }
+}
+
+@media (min-width: 60em) {   /* 960px */
+  :root {
+    --nav-height: 5rem;        /* 80px */
+    --mosaic-cell: 1.625rem;   /* 26px */
+  }
+}
