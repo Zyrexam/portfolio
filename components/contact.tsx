@@ -5,13 +5,31 @@ import { EMAIL, GITHUB, LEETCODE, LINKEDIN, RESUME } from "@/lib/links";
 
 export function Contact() {
   const [copied, setCopied] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
-    form.name ? `Inquiry from ${form.name}` : "Let's work together"
-  )}&body=${encodeURIComponent(
-    `${form.message || "Hi Mohit,"}\n\n— ${form.name || "Name"}${form.email ? ` (${form.email})` : ""}`
-  )}`;
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSending(true);
+    setError("");
+    setSent(false);
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Failed");
+      setSent(true);
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      setError("Something went wrong. Try again or email directly.");
+    } finally {
+      setSending(false);
+    }
+  }
 
   async function copyEmail() {
     try {
@@ -252,67 +270,39 @@ export function Contact() {
                     </label>
                   </div>
 
-                  <a
-                    href={mailtoHref}
-                    className="group relative mt-4 inline-flex w-full items-center justify-center overflow-hidden rounded-full px-6 py-[14px] text-[12px] font-bold tracking-[0.14em] transition hover:brightness-110 active:brightness-95"
-                    style={{ background: "var(--ws-text-primary)", color: "var(--ws-text-inverse)" }}
-                  >
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
-                      style={{ background: "var(--ws-gradient-sheen-dark)" }}
-                    />
-                    <span className="relative flex items-center gap-2">
-                      SEND MESSAGE <span className="transition group-hover:translate-x-0.5">→</span>
-                    </span>
-                  </a>
-                  <p className="mt-2 text-center font-mono text-[10px] tracking-[0.08em]" style={{ color: "var(--ws-text-muted)" }}>
-                    Opens your mail app — no tracking, no spam.
-                  </p>
+                  <form onSubmit={handleSubmit}>
+                    <button
+                      type="submit"
+                      disabled={sending}
+                      className="group relative mt-4 inline-flex w-full items-center justify-center overflow-hidden rounded-full px-6 py-[14px] text-[12px] font-bold tracking-[0.14em] transition hover:brightness-110 active:brightness-95 disabled:opacity-60"
+                      style={{ background: sent ? "#22c55e" : "var(--ws-text-primary)", color: "var(--ws-text-inverse)" }}
+                    >
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
+                        style={{ background: "var(--ws-gradient-sheen-dark)" }}
+                      />
+                      <span className="relative flex items-center gap-2">
+                        {sending ? "SENDING…" : sent ? "SENT ✓" : "SEND MESSAGE"} {!sending && !sent && <span className="transition group-hover:translate-x-0.5">→</span>}
+                      </span>
+                    </button>
+                  </form>
+                  {(sent || error) && (
+                    <p className="mt-2 text-center font-mono text-[10px] tracking-[0.08em]" style={{ color: error ? "#ef4444" : "#22c55e" }}>
+                      {error || "Message sent — I'll get back to you soon."}
+                    </p>
+                  )}
+                  {!sent && !error && (
+                    <p className="mt-2 text-center font-mono text-[10px] tracking-[0.08em]" style={{ color: "var(--ws-text-muted)" }}>
+                      Direct email — no tracking, no spam.
+                    </p>
+                  )}
                 </div>
 
-                {/* socials + fine print */}
-                <div className="mt-6 flex items-center justify-between gap-4 border-t pt-5" style={{ borderColor: "var(--ws-border-subtle)" }}>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <a href={GITHUB} target="_blank" rel="noreferrer" className="font-mono text-[11px] tracking-[0.1em] hover:underline underline-offset-4" style={{ color: "var(--ws-text-muted)" }}>
-                      GITHUB
-                    </a>
-                    <span style={{ color: "var(--ws-border-subtle)" }}>·</span>
-                    <a href={LINKEDIN} target="_blank" rel="noreferrer" className="font-mono text-[11px] tracking-[0.1em] hover:underline underline-offset-4" style={{ color: "var(--ws-text-muted)" }}>
-                      LINKEDIN
-                    </a>
-                    <span style={{ color: "var(--ws-border-subtle)" }}>·</span>
-                    <a href={LEETCODE} target="_blank" rel="noreferrer" className="font-mono text-[11px] tracking-[0.1em] hover:underline underline-offset-4" style={{ color: "var(--ws-text-muted)" }}>
-                      LEETCODE
-                    </a>
-                    <span style={{ color: "var(--ws-border-subtle)" }}>·</span>
-                    <a href={RESUME} target="_blank" rel="noreferrer" className="font-mono text-[11px] tracking-[0.1em] hover:underline underline-offset-4" style={{ color: "var(--ws-text-muted)" }}>
-                      RESUME
-                    </a>
-                  </div>
-                  <p className="hidden sm:block font-mono text-[10px] tracking-[0.08em]" style={{ color: "var(--ws-text-muted)" }}>
-                    © 2026 MOHIT KUMAR
-                  </p>
-                </div>
               </div>
             </div>
           </Reveal>
         </div>
-
-        {/* bottom bar */}
-        <Reveal delay={200}>
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-3 border-t pt-6" style={{ borderColor: "var(--ws-border-subtle)" }}>
-            <p className="font-mono text-[11px] tracking-[0.08em] text-center sm:text-left" style={{ color: "var(--ws-text-muted)" }}>
-              Built with Next.js & taste — <span style={{ color: "var(--ws-text-secondary)" }}>Jodhpur → Remote</span>
-            </p>
-            <p className="font-mono text-[11px] tracking-[0.08em]" style={{ color: "var(--ws-text-muted)" }}>
-              <a href={`mailto:${EMAIL}`} className="hover:underline underline-offset-4" style={{ color: "var(--ws-text-secondary)" }}>
-                {EMAIL}
-              </a>{" "}
-              · INDIA
-            </p>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
