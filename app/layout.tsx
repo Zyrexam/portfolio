@@ -1,30 +1,29 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-grotesk",
+const inter = Inter({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jbmono",
+const jetbrains = JetBrains_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Mohit Kumar — Backend Engineer",
+  title: "Mohit Kumar — Software Engineer",
   description:
-    "Backend engineer building distributed systems, async pipelines, and payment-grade APIs where reliability, performance, and clean design meet. IIT Jodhpur '26.",
+    "Software engineer building distributed systems, async pipelines, and payment-grade APIs where reliability, performance, and clean design meet. IIT Jodhpur '26.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
-    >
-      <body className="min-h-screen flex flex-col">{children}</body>
+    <html lang="en" data-theme="dark" className={`${inter.variable} ${jetbrains.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-[var(--ws-bg)] text-[var(--ws-text-primary)]">{children}</body>
     </html>
   );
 }
