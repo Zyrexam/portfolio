@@ -8,7 +8,6 @@ type Entry = {
   range: string;
   bullets: string[];
   tags: string[];
-  highlight?: boolean;
   link?: { label: string; href: string };
 };
 
@@ -35,7 +34,6 @@ const TIMELINE: Entry[] = [
       "Integrated the model into backend workflows with communication-aware updates and productivity feedback.",
     ],
     tags: ["Python", "Flower", "BiLSTM", "XGBoost", "ONNX"],
-    highlight: true,
     link: { label: "Read Paper", href: FEDMEET_PAPER },
   },
   {
@@ -45,7 +43,7 @@ const TIMELINE: Entry[] = [
     bullets: [
       "Undergraduate degree focused on distributed systems, system design, backend engineering, and competitive programming.",
     ],
-    tags: ["Distributed Systems", "System Design", "LeetCode 400+", "Codeforces Pupil"],
+    tags: ["CSE", "LeetCode", "Codeforces", "Systems", "Research"],
   },
 ];
 
@@ -65,7 +63,14 @@ export function Experience() {
       {/* vertical timeline */}
       <div className="relative pl-7 sm:pl-10">
         {/* spine */}
-        <div aria-hidden className="absolute bottom-3 left-[7px] top-2 w-px sm:left-[11px]" style={{ background: "var(--ws-border-default)" }} />
+        <div
+          aria-hidden
+          className="absolute bottom-3 left-[5px] top-2 w-[2px] rounded-full"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, var(--ws-border-strong) 8%, var(--ws-border-default) 92%, transparent)",
+          }}
+        />
 
         <div className="space-y-8">
           {TIMELINE.map((e, i) => (
@@ -74,11 +79,10 @@ export function Experience() {
                 {/* node */}
                 <span
                   aria-hidden
-                  className="absolute -left-7 top-1.5 h-3 w-3 rounded-full border-2 sm:-left-10"
+                  className="absolute -left-7 top-[7px] h-3 w-3 rounded-full sm:-left-10"
                   style={{
-                    background: e.highlight ? "var(--ws-silver)" : "var(--ws-bg)",
-                    borderColor: e.highlight ? "var(--ws-silver)" : "var(--ws-border-strong)",
-                    boxShadow: e.highlight ? "0 0 0 5px rgba(100,255,218,0.12)" : "none",
+                    background: "var(--ws-silver)",
+                    boxShadow: "0 0 0 4px var(--ws-bg)",
                   }}
                 />
 
@@ -103,9 +107,19 @@ export function Experience() {
                   ))}
                 </ul>
 
-                <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 font-mono text-[12.5px]" style={{ color: "var(--ws-text-muted)" }}>
+                <ul aria-label="Skills and tools" className="mt-4 flex flex-wrap gap-2">
                   {e.tags.map((t) => (
-                    <li key={t}>{t}</li>
+                    <li
+                      key={t}
+                      className="rounded-full border px-2.5 py-1 font-mono text-[11.5px] leading-5"
+                      style={{
+                        background: "var(--ws-surface-1)",
+                        borderColor: "var(--ws-border-default)",
+                        color: "var(--ws-text-secondary)",
+                      }}
+                    >
+                      {t}
+                    </li>
                   ))}
                 </ul>
 

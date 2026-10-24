@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "./reveal";
-
-const TECH = ["Java", "Python", "C++", "Go", "TypeScript", "Spring Boot", "FastAPI", "Redis", "PostgreSQL", "Docker", "gRPC", "Kubernetes"];
+import { Skills } from "./skills";
+import { FEDMEET_PAPER, TCS_PAPER } from "@/lib/links";
 
 export function About() {
   return (
@@ -16,77 +16,41 @@ export function About() {
         </div>
       </Reveal>
 
-      <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="space-y-4 text-[16px] leading-relaxed" style={{ color: "var(--ws-text-muted)" }}>
+      <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+        <div>
           <Reveal>
-            <p>
-              Hello! I&apos;m Mohit and I enjoy building things that live on the internet — distributed systems, async
-              pipelines, and <span style={{ color: "var(--ws-silver)" }}>payment-grade APIs</span> where reliability,
-              performance, and clean system design meet. My interest in backend engineering started at IIT Jodhpur,
-              where I went from writing my first Spring Boot service to obsessing over exactly-once semantics.
-            </p>
+            <h3 className="max-w-[26ch] text-[23px] font-semibold leading-[1.3] tracking-tight sm:text-[27px]" style={{ color: "var(--ws-text-primary)" }}>
+              I&apos;m Mohit Kumar, a software engineer focused on backend and distributed systems.
+            </h3>
           </Reveal>
           <Reveal delay={60}>
-            <p>
-              Fast-forward to today, and I&apos;ve had the privilege of{" "}
-              <span style={{ color: "var(--ws-silver)" }}>publishing peer-reviewed research</span> at ACM ICDCN &apos;26
-              and Elsevier&apos;s Theoretical Computer Science, building payment infrastructure, and shipping systems
-              that hold under load. My main focus these days is designing{" "}
-              <span style={{ color: "var(--ws-silver)" }}>idempotent, cache-first backends</span> that stay boring at
-              3am.
+            <p className="mt-5 max-w-[62ch] text-[15.5px] leading-[1.75]" style={{ color: "var(--ws-text-muted)" }}>
+              I completed my B.Tech in Computer Science at IIT Jodhpur in 2026. There, I worked on an NLP-to-Solidity compiler and FedMeet, federated learning research published at <a href={FEDMEET_PAPER} target="_blank" rel="noreferrer" className="underline decoration-[var(--ws-border-strong)] underline-offset-4 transition-colors hover:text-[var(--ws-text-primary)]">ACM ICDCN 2026</a>. My research on activity-adjusted stake consensus was also published in <a href={TCS_PAPER} target="_blank" rel="noreferrer" className="underline decoration-[var(--ws-border-strong)] underline-offset-4 transition-colors hover:text-[var(--ws-text-primary)]"><em>Theoretical Computer Science</em></a>.
             </p>
           </Reveal>
           <Reveal delay={120}>
-            <p>Here are a few technologies I&apos;ve been working with recently:</p>
-          </Reveal>
-          <Reveal delay={160}>
-            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-x-2" style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: "13px" }}>
-              {TECH.map((t) => (
-                <li key={t} className="flex items-center gap-2" style={{ color: "var(--ws-text-muted)" }}>
-                  <span aria-hidden style={{ color: "var(--ws-silver)" }}>▸</span> {t}
-                </li>
-              ))}
-            </ul>
+            <p className="mt-4 max-w-[62ch] text-[15.5px] leading-[1.75]" style={{ color: "var(--ws-text-muted)" }}>
+              I build services and tools that make complex work dependable, from VideoScale&apos;s background video processing to Workflow-Engine&apos;s resumable jobs. I care about clear APIs, durable state, and systems that recover cleanly when something fails.
+            </p>
           </Reveal>
         </div>
 
-        {/* portrait tile with teal wash + offset frame, like the reference */}
         <Reveal delay={100}>
-          <div className="relative mx-auto w-64 sm:w-80 lg:w-full lg:max-w-[340px]">
-            <div
-              aria-hidden
-              className="absolute inset-0 translate-x-4 translate-y-4 rounded-md border-2"
-              style={{ borderColor: "var(--ws-silver)" }}
-            />
-            <div
-              className="relative aspect-square overflow-hidden rounded-md"
-              style={{ background: "var(--ws-surface-1)" }}
-            >
+          <div className="mx-auto w-full max-w-[300px] lg:mr-0">
+            <div className="relative aspect-square overflow-hidden rounded-2xl border" style={{ background: "var(--ws-surface-1)", borderColor: "var(--ws-border-subtle)", boxShadow: "0 20px 44px rgba(0,0,0,0.22)" }}>
               <Image
                 src="/profile.jpeg"
                 alt="Mohit Kumar"
                 fill
-                sizes="(min-width: 1024px) 340px, (min-width: 640px) 320px, 256px"
+                sizes="(min-width: 1024px) 300px, (min-width: 640px) 280px, 240px"
                 className="object-cover object-[center_24%]"
               />
-              <div
-                aria-hidden
-                className="absolute inset-0 opacity-15 mix-blend-multiply"
-                style={{ background: "#64ffda" }}
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(circle at 50% 35%, rgba(230,241,255,0.28), transparent 60%), repeating-linear-gradient(45deg, rgba(10,25,47,0.16) 0 2px, transparent 2px 8px)",
-                }}
-              />
-              
             </div>
           </div>
         </Reveal>
       </div>
+
+      <Skills />
     </section>
   );
 }

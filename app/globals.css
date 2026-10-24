@@ -40,6 +40,7 @@
   --ws-text-inverse: #0a192f;
   --ws-border-subtle: rgba(136,146,176,.12);
   --ws-border-default: rgba(136,146,176,.22);
+  --ws-border-input: rgba(136,146,176,.65);
   --ws-border-strong: rgba(136,146,176,.32);
   --ws-surface-0: #0a192f;
   --ws-surface-1: #112240;
@@ -63,6 +64,7 @@
   --ws-text-inverse: #f4f5f6;
   --ws-border-subtle: rgba(8,10,12,.10);
   --ws-border-default: rgba(8,10,12,.18);
+  --ws-border-input: rgba(85,91,97,.65);
   --ws-border-strong: rgba(8,10,12,.30);
   --ws-surface-0: #e7e8ea;
   --ws-surface-1: #d7d9dc;

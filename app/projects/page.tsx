@@ -9,7 +9,7 @@ import { PROJECTS } from "@/lib/projects";
 export const metadata: Metadata = {
   title: "Projects — Mohit Kumar",
   description:
-    "Production-grade systems — payment idempotency, edge caching in C++17, webhook delivery, cloud storage, and a subsurface data platform.",
+    "Selected software projects spanning video processing, durable workflows, real-time products, backend systems, and AI infrastructure.",
 };
 
 export default function ProjectsPage() {
@@ -53,15 +53,15 @@ export default function ProjectsPage() {
             <Reveal delay={100}>
               <h1 className="text-[34px] sm:text-[46px] lg:text-[56px] font-bold leading-[0.88] tracking-[-0.045em]">
                 <span className="block" style={{ color: "var(--ws-text-primary)" }}>
-                  Production-grade
+                  Selected
                 </span>
-                <span className="block ws-logo-wordmark">systems.</span>
+                <span className="block ws-logo-wordmark">projects.</span>
               </h1>
             </Reveal>
             <Reveal delay={160}>
               <p className="text-[14.5px] leading-relaxed lg:pb-1.5 max-w-[48ch]" style={{ color: "var(--ws-text-secondary)" }}>
-                Everything here runs end to end — a payment proxy that refuses to charge twice, a C++17 CDN simulator, a
-                webhook engine with a dead-letter queue, and a subsurface data platform. Every card links to the code.
+                From Kafka-backed video processing and resumable workflows to rate limiting, encrypted real-time rooms,
+                and retrieval-augmented generation. Each card links to its GitHub repository.
               </p>
             </Reveal>
           </div>

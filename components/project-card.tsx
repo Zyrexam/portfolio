@@ -3,23 +3,23 @@ import type { Project } from "@/lib/projects";
 export function ProjectCard({ project: p }: { project: Project }) {
   return (
     <div
-      className="group relative flex h-full flex-col overflow-hidden rounded-[20px] border backdrop-blur transition-all duration-500 hover:-translate-y-[6px]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[20px] border motion-safe:transition-transform motion-safe:duration-200 motion-safe:hover:-translate-y-1"
       style={{
-        background: p.featured ? "rgba(36,40,44,0.9)" : "rgba(26,29,32,0.78)",
+        background: p.featured ? "var(--ws-surface-2)" : "var(--ws-surface-1)",
         borderColor: p.featured ? "var(--ws-border-default)" : "var(--ws-border-subtle)",
         boxShadow: p.featured
-          ? "0 16px 40px rgba(0,0,0,0.38), inset 0 1px 0 rgba(244,245,246,0.06)"
-          : "0 10px 28px rgba(0,0,0,0.28), inset 0 1px 0 rgba(244,245,246,0.04)",
+          ? "0 16px 36px rgba(0,0,0,0.22)"
+          : "0 10px 26px rgba(0,0,0,0.16)",
       }}
     >
       {/* whole-card link to the repository */}
-      <a
+      {p.href && <a
         href={p.href}
         target="_blank"
         rel="noreferrer"
         aria-label={`${p.title} — repository on GitHub`}
         className="absolute inset-0 z-10 rounded-[20px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ws-focus-ring)]"
-      />
+      />}
       {/* top hairline */}
       <div aria-hidden className="absolute top-0 left-4 right-4 h-px opacity-60 group-hover:opacity-100 transition" style={{ background: "var(--ws-gradient-edge-dark)" }} />
       {/* hover sheen */}
@@ -51,9 +51,11 @@ export function ProjectCard({ project: p }: { project: Project }) {
               <span className="h-2 w-2 rounded-full" style={{ background: "var(--ws-border-default)" }} />
               <span className="h-2 w-2 rounded-full" style={{ background: "var(--ws-border-subtle)" }} />
             </div>
-            <span className="font-mono text-[10px] tracking-[0.14em] rounded-full border px-2 py-1" style={{ borderColor: "var(--ws-border-subtle)", color: "var(--ws-text-muted)", background: "rgba(244,245,246,0.06)" }}>
-              {p.stat}
-            </span>
+            {p.stat && (
+              <span className="font-mono text-[10px] tracking-[0.14em] rounded-full border px-2 py-1" style={{ borderColor: "var(--ws-border-subtle)", color: "var(--ws-text-muted)", background: "rgba(244,245,246,0.06)" }}>
+                {p.stat}
+              </span>
+            )}
           </div>
 
           <div className="mt-auto">
@@ -103,10 +105,8 @@ export function ProjectCard({ project: p }: { project: Project }) {
             className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.14em] transition group-hover:gap-2.5"
             style={{ color: "var(--ws-text-secondary)" }}
           >
-            VIEW REPO
-            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
+            {p.href ? "VIEW REPO" : "PROJECT"}
+            {p.href && <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>}
           </span>
           {p.live ? (
             <a
