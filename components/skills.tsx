@@ -22,13 +22,13 @@ const GROUPS = [
 
 export function Skills() {
   return (
-    <div id="skills" className="mt-14 border-t pt-9 md:mt-16 md:pt-10" style={{ borderColor: "var(--ws-border-subtle)" }}>
+    <div id="skills" className="mt-6 border-t pt-8 md:mt-8 md:pt-9" style={{ borderColor: "var(--ws-border-subtle)" }}>
       <Reveal>
         <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="font-mono text-[11px] tracking-[0.14em]" style={{ color: "var(--ws-silver)" }}>SKILLS &amp; TOOLS</p>
-            <h3 className="mt-1 text-[21px] font-semibold tracking-tight sm:text-[23px]" style={{ color: "var(--ws-text-primary)" }}>
-              What I work with
+            <h3 className="flex items-baseline gap-3 text-[26px] font-bold tracking-tight sm:text-[30px]">
+              <span className="font-mono text-[20px] font-normal" style={{ color: "var(--ws-silver)" }}>01.</span>
+              <span style={{ color: "var(--ws-text-primary)" }}>Skills &amp; Tools</span>
             </h3>
           </div>
           <p className="max-w-[42ch] text-[13.5px] leading-relaxed" style={{ color: "var(--ws-text-muted)" }}>

@@ -1,13 +1,12 @@
 import { Header } from "@/components/header";
-import { About } from "@/components/about";
+import { Skills } from "@/components/skills";
 import { Experience } from "@/components/experience";
 import { Work } from "@/components/work";
 import { Writing } from "@/components/writing";
 import { Contact } from "@/components/contact";
 import { SiteFooter } from "@/components/site-footer";
-import { EMAIL, GITHUB, LEETCODE, LINKEDIN, MEDIUM } from "@/lib/links";
+import { EMAIL, FEDMEET_PAPER, GITHUB, LEETCODE, LINKEDIN, MEDIUM, TCS_PAPER } from "@/lib/links";
 import { ArrowRight } from "lucide-react";
-import { FEDMEET_PAPER, TCS_PAPER } from "@/lib/links";
 
 const SOCIALS = [
   { label: "GitHub", href: GITHUB, icon: "github" },
@@ -83,8 +82,9 @@ export default function Home() {
 
       <main className="mx-auto max-w-6xl px-6 md:px-8 lg:px-16">
         {/* ── Hero ── */}
-        <section className="flex min-h-screen flex-col justify-center py-28 md:py-32">
-          <div className="max-w-4xl">
+        <section id="about" className="scroll-mt-24 flex flex-col justify-center pt-28 pb-16 md:pt-32 md:pb-16">
+          <div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.55fr)_minmax(250px,0.65fr)]">
+            <div className="max-w-4xl">
             <p className="mb-5 text-[13px] font-medium tracking-wide" style={{ color: "var(--ws-text-secondary)" }}>
               Software engineer <span aria-hidden="true" style={{ color: "var(--ws-silver)" }}>·</span> Backend &amp; distributed systems
             </p>
@@ -97,6 +97,9 @@ export default function Home() {
             <p className="mt-5 max-w-[58ch] text-[16px] leading-[1.75] sm:text-[17px]" style={{ color: "var(--ws-text-muted)" }}>
               From VideoScale&apos;s video pipeline to Workflow-Engine&apos;s durable jobs, I build APIs and asynchronous services that keep work moving through retries and restarts.
             </p>
+            <p className="mt-4 max-w-[58ch] text-[15px] leading-[1.75] sm:text-[16px]" style={{ color: "var(--ws-text-muted)" }}>
+              I completed my B.Tech in Computer Science at IIT Jodhpur in 2026. My research on federated learning and blockchain consensus was published at <a href={FEDMEET_PAPER} target="_blank" rel="noreferrer" className="underline decoration-[var(--ws-border-strong)] underline-offset-4 transition-colors hover:text-[var(--ws-text-primary)]">ACM ICDCN 2026</a> and in <a href={TCS_PAPER} target="_blank" rel="noreferrer" className="underline decoration-[var(--ws-border-strong)] underline-offset-4 transition-colors hover:text-[var(--ws-text-primary)]"><em>Theoretical Computer Science</em></a>. I also built an NLP-to-Solidity compiler.
+            </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2">
               <a
                 href="#work"
@@ -106,42 +109,33 @@ export default function Home() {
                 View selected work
                 <ArrowRight aria-hidden="true" size={15} className="transition-transform group-hover:translate-x-0.5" />
               </a>
-              <a
-                href="#about"
-                className="group inline-flex min-h-11 items-center gap-2 text-[14px] font-medium transition-colors hover:text-[var(--ws-text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ws-focus-ring)]"
-                style={{ color: "var(--ws-text-secondary)" }}
-              >
-                About me
-                <ArrowRight aria-hidden="true" size={14} className="transition-transform group-hover:translate-x-0.5" />
-              </a>
             </div>
 
-            <dl className="mt-10 grid max-w-2xl grid-cols-3 gap-4 border-t pt-5 sm:gap-8" style={{ borderColor: "var(--ws-border-default)" }}>
-              <div>
+            </div>
+
+            <aside aria-label="Competitive programming stats" className="border-t pt-4 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0" style={{ borderColor: "var(--ws-border-default)" }}>
+              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] lg:mb-1" style={{ color: "var(--ws-text-muted)" }}>Competitive programming</p>
+              <dl className="grid grid-cols-3 gap-4 lg:grid-cols-1 lg:gap-0">
+              <div className="lg:border-b lg:py-5 lg:first:pt-3" style={{ borderColor: "var(--ws-border-subtle)" }}>
                 <dt className="font-mono text-[10px] uppercase tracking-[0.12em] sm:text-[11px]" style={{ color: "var(--ws-text-muted)" }}>Codeforces</dt>
-                <dd className="mt-1 text-[18px] font-semibold tracking-tight sm:text-[20px]" style={{ color: "var(--ws-text-primary)" }}>1300+</dd>
+                <dd className="mt-1 text-[24px] font-semibold tracking-tight sm:text-[27px]" style={{ color: "var(--ws-text-primary)" }}>1300+</dd>
               </div>
-              <div>
+              <div className="lg:border-b lg:py-5" style={{ borderColor: "var(--ws-border-subtle)" }}>
                 <dt className="font-mono text-[10px] uppercase tracking-[0.12em] sm:text-[11px]" style={{ color: "var(--ws-text-muted)" }}>LeetCode contest rating</dt>
-                <dd className="mt-1 text-[18px] font-semibold tracking-tight sm:text-[20px]" style={{ color: "var(--ws-text-primary)" }}>1500+</dd>
+                <dd className="mt-1 text-[24px] font-semibold tracking-tight sm:text-[27px]" style={{ color: "var(--ws-text-primary)" }}>1500+</dd>
               </div>
-              <div>
+              <div className="lg:py-5 lg:last:pb-0">
                 <dt className="font-mono text-[10px] uppercase tracking-[0.12em] sm:text-[11px]" style={{ color: "var(--ws-text-muted)" }}>Problems solved</dt>
-                <dd className="mt-1 text-[18px] font-semibold tracking-tight sm:text-[20px]" style={{ color: "var(--ws-text-primary)" }}>800+</dd>
+                <dd className="mt-1 text-[24px] font-semibold tracking-tight sm:text-[27px]" style={{ color: "var(--ws-text-primary)" }}>800+</dd>
                 <span className="text-[11px]" style={{ color: "var(--ws-text-muted)" }}>across platforms</span>
               </div>
-            </dl>
-
-            <div className="mt-12 max-w-4xl border-t pt-4 text-[12.5px] leading-relaxed sm:text-[13px]" style={{ borderColor: "var(--ws-border-default)", color: "var(--ws-text-muted)" }}>
-              B.Tech, Computer Science · IIT Jodhpur <span aria-hidden="true">·</span>{" "}
-              Research: <a href={FEDMEET_PAPER} target="_blank" rel="noreferrer" className="underline decoration-[var(--ws-border-strong)] underline-offset-4 transition-colors hover:text-[var(--ws-text-primary)]">ACM ICDCN 2026</a> and{" "}
-              <a href={TCS_PAPER} target="_blank" rel="noreferrer" className="underline decoration-[var(--ws-border-strong)] underline-offset-4 transition-colors hover:text-[var(--ws-text-primary)]">Theoretical Computer Science</a>
-            </div>
+              </dl>
+            </aside>
           </div>
         </section>
 
         {/* ── Sections, one after another ── */}
-        <About />
+        <Skills />
         <Experience />
         <Work />
         <Writing />
