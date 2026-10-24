@@ -116,6 +116,22 @@ export default function Home() {
               </a>
             </div>
 
+            <dl className="mt-10 grid max-w-2xl grid-cols-3 gap-4 border-t pt-5 sm:gap-8" style={{ borderColor: "var(--ws-border-default)" }}>
+              <div>
+                <dt className="font-mono text-[10px] uppercase tracking-[0.12em] sm:text-[11px]" style={{ color: "var(--ws-text-muted)" }}>Codeforces</dt>
+                <dd className="mt-1 text-[18px] font-semibold tracking-tight sm:text-[20px]" style={{ color: "var(--ws-text-primary)" }}>1300+</dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[10px] uppercase tracking-[0.12em] sm:text-[11px]" style={{ color: "var(--ws-text-muted)" }}>LeetCode contest rating</dt>
+                <dd className="mt-1 text-[18px] font-semibold tracking-tight sm:text-[20px]" style={{ color: "var(--ws-text-primary)" }}>1500+</dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[10px] uppercase tracking-[0.12em] sm:text-[11px]" style={{ color: "var(--ws-text-muted)" }}>Problems solved</dt>
+                <dd className="mt-1 text-[18px] font-semibold tracking-tight sm:text-[20px]" style={{ color: "var(--ws-text-primary)" }}>800+</dd>
+                <span className="text-[11px]" style={{ color: "var(--ws-text-muted)" }}>across platforms</span>
+              </div>
+            </dl>
+
             <div className="mt-12 max-w-4xl border-t pt-4 text-[12.5px] leading-relaxed sm:text-[13px]" style={{ borderColor: "var(--ws-border-default)", color: "var(--ws-text-muted)" }}>
               B.Tech, Computer Science · IIT Jodhpur <span aria-hidden="true">·</span>{" "}
               Research: <a href={FEDMEET_PAPER} target="_blank" rel="noreferrer" className="underline decoration-[var(--ws-border-strong)] underline-offset-4 transition-colors hover:text-[var(--ws-text-primary)]">ACM ICDCN 2026</a> and{" "}

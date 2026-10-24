@@ -30,7 +30,7 @@ export function Research() {
           </Reveal>
           <Reveal delay={80}>
             <p className="text-[14.5px] leading-relaxed max-w-[46ch]" style={{ color: "var(--ws-text-secondary)" }}>
-              Two peer-reviewed papers and the field notes behind them — federated learning, blockchain consensus, payments, and Java internals.
+              Two published papers, an unpublished Blockchain LLM research project, and field notes on payments and Java internals.
             </p>
           </Reveal>
         </div>

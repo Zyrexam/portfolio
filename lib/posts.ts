@@ -3,11 +3,11 @@ import { FEDMEET_PAPER, TCS_PAPER } from "./links";
 export type Post = {
   n: string;
   date: string;
-  read: "PAPER" | "ESSAY";
+  read: "PAPER" | "ESSAY" | "UNPUBLISHED";
   title: string;
   excerpt: string;
   tags: string[];
-  href: string;
+  href?: string;
   /** Shown in the home page Research section. The rest live on /articles. */
   home?: boolean;
 };
@@ -39,6 +39,16 @@ export const POSTS: Post[] = [
   },
   {
     n: "03",
+    date: "B.TECH RESEARCH",
+    read: "UNPUBLISHED",
+    title: "Blockchain LLM",
+    excerpt:
+      "An unpublished B.Tech research project. Details will be added when the work is officially released.",
+    tags: ["Blockchain", "LLM"],
+    home: true,
+  },
+  {
+    n: "04",
     date: "SEP 2026",
     read: "ESSAY",
     title: "My IDE Yelled at My @Autowired — It Was Right",
@@ -49,7 +59,7 @@ export const POSTS: Post[] = [
     home: true,
   },
   {
-    n: "04",
+    n: "05",
     date: "AUG 2026",
     read: "ESSAY",
     title: "I Built an AI Twitter Bot That Runs Itself for Less Than a Penny a Month",
@@ -60,7 +70,7 @@ export const POSTS: Post[] = [
     home: true,
   },
   {
-    n: "05",
+    n: "06",
     date: "JUL 2026",
     read: "ESSAY",
     title: "Exactly-Once, Damn It: Building a Payment Idempotency Layer",
