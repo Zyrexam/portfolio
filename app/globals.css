@@ -30,24 +30,26 @@
 }
 
 [data-theme="dark"] {
-  --ws-bg: #101214;
-  --ws-bg-elevated: #1a1d20;
-  --ws-bg-interactive: #24282c;
-  --ws-bg-inverse: #e7e8ea;
-  --ws-text-primary: #f4f5f6;
-  --ws-text-secondary: #cdd1d5;
-  --ws-text-muted: #969da4;
-  --ws-text-inverse: #080a0c;
-  --ws-border-subtle: rgba(244,245,246,.10);
-  --ws-border-default: rgba(244,245,246,.18);
-  --ws-border-strong: rgba(244,245,246,.32);
-  --ws-surface-0: #101214;
-  --ws-surface-1: #15181b;
-  --ws-surface-2: #1a1d20;
-  --ws-surface-3: #24282c;
-  --ws-focus-ring: #cdd1d5;
-  --ws-logo-gradient: var(--ws-dark-logo-linear);
-  --ws-background-angular: var(--ws-dark-background-angular);
+  --ws-bg: #0a192f;
+  --ws-bg-elevated: #112240;
+  --ws-bg-interactive: #233554;
+  --ws-bg-inverse: #0a192f;
+  --ws-text-primary: #ccd6f6;
+  --ws-text-secondary: #a8b2d1;
+  --ws-text-muted: #8892b0;
+  --ws-text-inverse: #0a192f;
+  --ws-border-subtle: rgba(136,146,176,.12);
+  --ws-border-default: rgba(136,146,176,.22);
+  --ws-border-strong: rgba(136,146,176,.32);
+  --ws-surface-0: #0a192f;
+  --ws-surface-1: #112240;
+  --ws-surface-2: #233554;
+  --ws-surface-3: #233554;
+  --ws-focus-ring: #64ffda;
+  --ws-logo-gradient: linear-gradient(112deg, #e6f1ff, #ccd6f6 24%, #8892b0 48%, #e6f1ff 72%, #a8b2d1);
+  --ws-background-angular: radial-gradient(circle at 50% 50%, #112240, #0a192f);
+  --ws-silver: #64ffda;
+  --ws-titanium: #64ffda;
 }
 
 [data-theme="light"] {
